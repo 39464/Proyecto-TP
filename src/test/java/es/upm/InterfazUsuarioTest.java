@@ -222,7 +222,7 @@ public class InterfazUsuarioTest {
         Scanner scanner = new Scanner(System.in);
         interfaz.iniciar(scanner);
 
-        assertTrue(salidaCapturada.toString().contains("Introduce el nombre del archivo donde guardar las actividades: "), "Hay que solicitar el nombre del archivo donde guardar las actividades");
+        assertTrue(salidaCapturada.toString().contains("Archivo donde guardar las actividades: "), "Hay que solicitar el nombre del archivo donde guardar las actividades");
         assertTrue(salidaCapturada.toString().contains("Actividades guardadas en"), "Hay que avisar al usuario de que las actividades se han guardado correctamente");
     }
 
@@ -249,7 +249,7 @@ public class InterfazUsuarioTest {
         Scanner scanner = new Scanner(System.in);
         interfaz.iniciar(scanner);
 
-        assertTrue(salidaCapturada.toString().contains("Introduce la ruta del archivo de donde cargar las actividades: "), "Hay que solicitar el nombre del archivo donde cargar las actividades");
+        assertTrue(salidaCapturada.toString().contains("Archivo de donde cargar las actividades: "), "Hay que solicitar el nombre del archivo donde cargar las actividades");
         assertTrue(salidaCapturada.toString().contains("Actividades cargadas desde"), "Hay que avisar al usuario de que las actividades se han cargado correctamente");
     }
 
@@ -276,8 +276,7 @@ public class InterfazUsuarioTest {
         Scanner scanner = new Scanner(System.in);
         interfaz.iniciar(scanner);
 
-        assertTrue(salidaCapturada.toString().contains("Introduce el nombre del archivo donde guardar el itinerario: "), "Hay que solicitar el nombre del archivo donde guardar el itinerario");
+        assertTrue(salidaCapturada.toString().contains("Archivo donde guardar el itinerario: "), "Hay que solicitar el nombre del archivo donde guardar el itinerario");
         assertTrue(salidaCapturada.toString().contains("Itinerario guardado en"), "Hay que avisar al usuario de que el itinerario se ha guardado correctamente");
     }
 }
-

@@ -1,4 +1,4 @@
-# Enunciado Talle de Programación
+# Enunciado de Taller de Programación
 
 2025-26
 
