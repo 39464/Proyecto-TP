@@ -37,7 +37,7 @@ public class Utilidades {
     }
 
     public static double leerDouble(Scanner teclado, String mensaje, double minimo, double maximo) {
-        double resultado = 0;
+        double resultado = 0.0;
         boolean esValido = false;
         try {
             do {
@@ -106,10 +106,11 @@ public class Utilidades {
         int mins = minutos%60;
         String resultado = hora + ":" + mins;
         if (hora >= 0 && hora < 10) {
-            if (minutos >= 0 && minutos < 10) {
+            if (mins >= 0 && mins < 10) {
                 resultado = "0" + hora + ":0" + mins;
-            }
+            }else{
             resultado = "0" + hora + ":" + mins;
+            }
         }
         return resultado; // Convierte minutos desde medianoche a formato "HH:MM"
     }
