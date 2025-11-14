@@ -122,7 +122,7 @@ public class UtilidadesTest {
         assertEquals(0.0, Utilidades.cadenaAPrecio("0.00 €"), 0.001);
         assertEquals(12.5, Utilidades.cadenaAPrecio("12.50 €"), 0.001);
         assertEquals(99.99, Utilidades.cadenaAPrecio("99.99 €"), 0.001);
-        assertEquals(100.0, Utilidades.cadenaAPrecio("100.00€"), 0.001);
+        assertEquals(100.0, Utilidades.cadenaAPrecio("100.00 €"), 0.001);
         assertEquals(5.0, Utilidades.cadenaAPrecio("5.00 €"), 0.001);
     }
 

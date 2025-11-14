@@ -24,9 +24,12 @@ public class Utilidades {
                 resultado = teclado.nextInt();
                 if  (resultado > minimo || resultado < maximo) {
                     esValido = true;
+                } else {
+                    System.out.println("El número debe estar entre "+minimo+" y "+maximo);
                 }
             } else {
-                System.out.println("Error. Debe introducir un entero");
+                resultado = 10;
+                System.out.println("Por favor, introduce un número válido");
                 teclado.nextLine();
             }
         } while (!esValido);
@@ -36,42 +39,56 @@ public class Utilidades {
     public static double leerDouble(Scanner teclado, String mensaje, double minimo, double maximo) {
         double resultado = 0;
         boolean esValido = false;
-        do{
-            System.out.println(mensaje);
-            if (teclado.hasNextDouble()) {
-                resultado = teclado.nextDouble();
-                if  (resultado > minimo || resultado < maximo) {
-                    esValido = true;
+        try {
+            do {
+                System.out.println(mensaje);
+                if (teclado.hasNextDouble()) {
+                    resultado = teclado.nextDouble();
+                    if (resultado > minimo || resultado < maximo) {
+                        esValido = true;
+                    } else {
+                        System.out.println("El número debe estar entre " + minimo + " y " + maximo);
+                    }
+                } else {
+                    System.out.println("Por favor, introduce un número válido.");
+                    teclado.nextLine();
                 }
-            } else {
-                System.out.println("Error. Debe introducir un número decimal");
-                teclado.nextLine();
-            }
-        } while (!esValido);
+            } while (!esValido);
+        }catch (NumberFormatException e){
+            System.out.println("Por favor, introduce un número válido.");
+        }
         return resultado; //lee un número decimal en el rango [minimo, maximo]
     }
 
     public static String leerHora(Scanner teclado, String mensaje) {
         boolean esValido = false;
         String resultado = "";
-        do {
-            String horaEntrada = leerCadena(teclado, mensaje);
-            if (horaEntrada.contains(":")) {
-                String[] partes = horaEntrada.split(":");
-                try {
+        try {
+            do {
+                String horaEntrada = leerCadena(teclado, mensaje);
+                if (horaEntrada.contains(":")) {
+                    String[] partes = horaEntrada.split(":");
                     int hora = Integer.parseInt(partes[0]);
                     int minuto = Integer.parseInt(partes[1]);
                     if ((partes[0].length() == 2) && (partes[1].length() == 2)) {
-                        esValido = true;
-                        resultado = horaEntrada;
+                        if (hora < 24 && hora >= 0){
+                            if (minuto < 60 && minuto >= 0){
+                                esValido = true;
+                                resultado = horaEntrada;
+                            } else{
+                                System.out.println("Los minutos deben estar entre 00 y 59");
+                            }
+                        } else{
+                            System.out.println("Las horas deben estar entre 00 y 23");
+                        }
                     }
-                }catch (NumberFormatException e) {
+                } else {
                     System.out.println("Debe introducir una hora en el formato indicado.");
                 }
-            } else {
-                System.out.println("Debe introducir una hora en el formato indicado.");
-            }
-        }while (!esValido);
+            }while (!esValido);
+        }catch (NumberFormatException e) {
+            System.out.println("Debe introducir una hora en el formato indicado.");
+        }
         return resultado; // Muestra un mensaje y lee una hora en formato "HH:MM"
     }
 
@@ -87,13 +104,28 @@ public class Utilidades {
     public static String minutosAHora(int minutos) {
         int hora = minutos/60;
         int mins = minutos%60;
-        return hora + ":" + mins; // Convierte minutos desde medianoche a formato "HH:MM"
+        String resultado = hora + ":" + mins;
+        if (hora >= 0 && hora < 10) {
+            if (minutos >= 0 && minutos < 10) {
+                resultado = "0" + hora + ":0" + mins;
+            }
+            resultado = "0" + hora + ":" + mins;
+        }
+        return resultado; // Convierte minutos desde medianoche a formato "HH:MM"
     }
 
     public static String formatearDuracion(int duracionMinutos) {
+        String resultado = "";
         String cadena = minutosAHora(duracionMinutos);
         String[] partes = cadena.split(":");
-        return Integer.parseInt(partes[0])+"h "+Integer.parseInt(partes[1])+"min ";
+        if (Integer.parseInt(partes[0]) == 0) {
+            resultado = Integer.parseInt(partes[1]) + "min";
+        } else if (Integer.parseInt(partes[1]) == 0) {
+            resultado = Integer.parseInt(partes[0]) + "h";
+        } else {
+            resultado = Integer.parseInt(partes[0])+"h "+Integer.parseInt(partes[1])+"min";
+        }
+        return resultado;
     }// Formatea una duración en minutos a formato legible (ej: 90 -> "1h 30min")
 
     public static String formatearPrecio(double precio) { return precio + " €"; }
