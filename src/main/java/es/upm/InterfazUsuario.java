@@ -9,7 +9,23 @@ public class InterfazUsuario {
     }
 
     public void iniciar(Scanner scanner) {
-        // Inicia el bucle del menú principal
+        boolean seguir = true;
+        do{
+            System.out.println("---Menú principal---\n");
+            System.out.println("1. Agregar Actividad\n " +
+                "2. Consultar/Editar Actividad\n" +
+                "3. Guardar Actividades\n"+
+                "4. Cargar Actividades\n" +
+                "5. Planificar Viaje\n" +
+                "6. Guardar Itinerario\n" +
+                "7. Salir\n");
+        int opcion = scanner.nextInt();
+        switch(opcion){
+            case 1: agregarActividad(scanner); break;
+            case 2: consultarActividad(scanner); break;
+            case 7: seguir = false; break;
+        }
+        }while(seguir);
     }
 
     private void menuPrincipal(Scanner scanner) {
