@@ -28,7 +28,7 @@ public class Utilidades {
                     System.out.println("El número debe estar entre "+minimo+" y "+maximo);
                 }
             } else {
-                resultado = 10;
+                resultado = maximo/2;
                 System.out.println("Por favor, introduce un número válido");
                 teclado.nextLine();
             }
@@ -39,8 +39,8 @@ public class Utilidades {
     public static double leerDouble(Scanner teclado, String mensaje, double minimo, double maximo) {
         double resultado = 0.0;
         boolean esValido = false;
-        try {
-            do {
+        do {
+            try {
                 System.out.println(mensaje);
                 if (teclado.hasNextDouble()) {
                     resultado = teclado.nextDouble();
@@ -48,15 +48,16 @@ public class Utilidades {
                         esValido = true;
                     } else {
                         System.out.println("El número debe estar entre " + minimo + " y " + maximo);
+                        teclado.nextLine();
                     }
                 } else {
                     System.out.println("Por favor, introduce un número válido.");
                     teclado.nextLine();
                 }
-            } while (!esValido);
-        }catch (NumberFormatException e){
-            System.out.println("Por favor, introduce un número válido.");
-        }
+            }catch (NumberFormatException e){
+                System.out.println("Por favor, introduce un número válido.");
+            }
+        } while (!esValido);
         return resultado; //lee un número decimal en el rango [minimo, maximo]
     }
 
@@ -111,6 +112,10 @@ public class Utilidades {
             }else{
             resultado = "0" + hora + ":" + mins;
             }
+        }else{
+            if (mins >= 0 && mins < 10) {
+                resultado = hora + ":0" + mins;
+            }
         }
         return resultado; // Convierte minutos desde medianoche a formato "HH:MM"
     }
@@ -129,7 +134,17 @@ public class Utilidades {
         return resultado;
     }// Formatea una duración en minutos a formato legible (ej: 90 -> "1h 30min")
 
-    public static String formatearPrecio(double precio) { return precio + " €"; }
+    public static String formatearPrecio(double precio) {
+        String[] decimales= (Double.toString(precio)).split("\\.");
+        String resultado = "";
+        if (decimales[1].length() < 2) {
+            resultado = decimales[0] + "."+decimales[1]+"0 €";
+        }else{
+            resultado = precio + " €";
+        }
+        return resultado;
+    }
+
     // Formatea un precio a formato legible (ej: 12.50 -> "12.50 €")
 
     public static double cadenaAPrecio(String precioStr) {
