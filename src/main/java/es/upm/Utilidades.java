@@ -1,5 +1,6 @@
 package es.upm;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -22,13 +23,13 @@ public class Utilidades {
             System.out.println(mensaje);
             if (teclado.hasNextInt()) {
                 resultado = teclado.nextInt();
-                if  (resultado > minimo || resultado < maximo) {
+                if  (resultado >= minimo && resultado <= maximo) {
                     esValido = true;
                 } else {
                     System.out.println("El número debe estar entre "+minimo+" y "+maximo);
+                    teclado.nextLine();
                 }
             } else {
-                resultado = maximo/2;
                 System.out.println("Por favor, introduce un número válido");
                 teclado.nextLine();
             }
@@ -37,25 +38,22 @@ public class Utilidades {
     }
 
     public static double leerDouble(Scanner teclado, String mensaje, double minimo, double maximo) {
+        teclado = teclado.useLocale(Locale.US);
         double resultado = 0.0;
         boolean esValido = false;
         do {
-            try {
-                System.out.println(mensaje);
-                if (teclado.hasNextDouble()) {
-                    resultado = teclado.nextDouble();
-                    if (resultado > minimo || resultado < maximo) {
-                        esValido = true;
-                    } else {
-                        System.out.println("El número debe estar entre " + minimo + " y " + maximo);
-                        teclado.nextLine();
-                    }
+            System.out.println(mensaje);
+            if(teclado.hasNextDouble()) {
+                resultado = teclado.nextDouble();
+                if (resultado >= minimo && resultado <= maximo) {
+                    esValido = true;
                 } else {
-                    System.out.println("Por favor, introduce un número válido.");
+                    System.out.println("El número debe estar entre " + minimo + " y " + maximo);
                     teclado.nextLine();
                 }
-            }catch (NumberFormatException e){
-                System.out.println("Por favor, introduce un número válido.");
+            }else{
+            System.out.println("Por favor, introduce un número válido.");
+            teclado.nextLine();
             }
         } while (!esValido);
         return resultado; //lee un número decimal en el rango [minimo, maximo]
