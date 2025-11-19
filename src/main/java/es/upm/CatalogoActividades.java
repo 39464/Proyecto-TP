@@ -1,9 +1,5 @@
 package es.upm;
 import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.FileReader;
 
 public class CatalogoActividades {
 
@@ -11,32 +7,49 @@ public class CatalogoActividades {
     public static final int ERROR_ACTIVIDAD_NULL = 1;
     public static final int ERROR_DEMASIADOS = 2;
 
+    private Actividad[] actividades;
+    private int maxActividades;
+
     public CatalogoActividades(int maxActividades) {
-        // Constructor del catálogo
-    }
+        this.maxActividades = maxActividades;
+        actividades = new Actividad[maxActividades]; }
 
-    public boolean actividadesCompletas() {
-        // Indica si el catálogo está lleno.
-        return true; // @todo MODIFICAR PARA DEVOLVER SI LAS ACTIVIDADES ESTÁN COMPLETAS
-    }
+    public boolean actividadesCompletas() { return (actividades.length == maxActividades); }// Devuelve si las actividades están completas
 
-    public int getNumActividades() {
-        // Devuelve el número actual de actividades en el catálogo
-        return 0; // @todo MODIFICAR PARA DEVOLVER EL NÚMERO DE ACTIVIDADES
-    }
+    public int getNumActividades() { return actividades.length; } // Devuelve el número actual de actividades en el catálogo
 
     public int agregarActividad(Actividad actividad) {
-        // Agrega una actividad al catálogo si hay espacio disponible
-        return 0; // @todo MODIFICAR PARA DEVOLVER EL CÓDIGO DE EXITO/ERROR
+        int resultado;
+        if (!actividadesCompletas()) {
+            actividades[actividades.length] = actividad;
+            resultado = EXITO;
+        }else{
+            resultado = ERROR_DEMASIADOS;
+        }
+        return resultado; // Agrega una actividad al catálogo si hay espacio disponible
     }
 
     public boolean eliminarActividad(Actividad seleccionada) {
-        return true; // @todo MODIFICAR PARA DEVOLVER SI SE HA PODIDO ELIMINAR
+        boolean resultado = false;
+        for (int i = 0; i < actividades.length; i++) {
+            if (seleccionada.equals(actividades[i].getNombre())) {
+                actividades[i] = null;
+                resultado = true;
+            }else{
+                resultado = false;
+            }
+        }
+        return resultado; // Elimina la actividad cuyo nombre sea el seleccionado
     }
 
     public Actividad[] buscarActividadPorNombre(String texto) {
-        // Devuelve actividades cuyo nombre contenga el texto indicado
-        return null; // @todo MODIFICAR PARA DEVOLVER LAS ACTIVIDADES QUE COINCIDEN
+        Actividad[] actividadesCoinciden = new Actividad[maxActividades];
+        for(int i = 0; i < actividades.length; i++){
+            if(actividades[i].getNombre().contains(texto)){
+                actividadesCoinciden[actividadesCoinciden.length]= actividades[i];
+            }
+        }
+        return actividadesCoinciden; // Devuelve actividades cuyo nombre contenga el texto indicado
     }
 
     public void guardarActividades(String nombreArchivo) throws IOException {
