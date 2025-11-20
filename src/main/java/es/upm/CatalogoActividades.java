@@ -21,7 +21,7 @@ public class CatalogoActividades {
     public int agregarActividad(Actividad actividad) {
         int resultado;
         if (!actividadesCompletas()) {
-            actividades[actividades.length] = actividad;
+            actividades[actividades.length-1] = actividad;
             resultado = EXITO;
         }else{
             resultado = ERROR_DEMASIADOS;
@@ -31,13 +31,16 @@ public class CatalogoActividades {
 
     public boolean eliminarActividad(Actividad seleccionada) {
         boolean resultado = false;
-        for (int i = 0; i < actividades.length; i++) {
-            if (seleccionada.equals(actividades[i].getNombre())) {
+        int i = 0;
+        while (!resultado && i < actividades.length) {
+            if (actividades[i].getNombre().equals(seleccionada)) {
                 actividades[i] = null;
+                for (int j = i+1; j < actividades.length; j++) {
+                    actividades[j-1]= actividades[j];
+                }
                 resultado = true;
-            }else{
-                resultado = false;
             }
+            i++;
         }
         return resultado; // Elimina la actividad cuyo nombre sea el seleccionado
     }
@@ -46,7 +49,7 @@ public class CatalogoActividades {
         Actividad[] actividadesCoinciden = new Actividad[maxActividades];
         for(int i = 0; i < actividades.length; i++){
             if(actividades[i].getNombre().contains(texto)){
-                actividadesCoinciden[actividadesCoinciden.length]= actividades[i];
+                actividadesCoinciden[actividadesCoinciden.length-1]= actividades[i];
             }
         }
         return actividadesCoinciden; // Devuelve actividades cuyo nombre contenga el texto indicado
