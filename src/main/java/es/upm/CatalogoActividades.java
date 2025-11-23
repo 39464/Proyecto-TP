@@ -62,4 +62,8 @@ public class CatalogoActividades {
     public void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
         // Carga actividades desde un archivo de texto previamente guardado
     }
+
+    /*se deben lanzar las excepciones para que sean
+    manejadas en el metodo que llama a guardarActividades y
+    cargarActividades.*/
 }
