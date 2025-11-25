@@ -7,18 +7,18 @@ public class CatalogoActividades {
     public static final int ERROR_ACTIVIDAD_NULL = 1;
     public static final int ERROR_DEMASIADOS = 2;
 
-    private Actividad[] actividades;
-    private int maxActividades;
+    private static Actividad[] actividades;
+    private static int maxActividades;
 
     public CatalogoActividades(int maxActividades) {
         this.maxActividades = maxActividades;
         actividades = new Actividad[maxActividades]; }
 
-    public boolean actividadesCompletas() { return (actividades.length == maxActividades); }// Devuelve si las actividades están completas
+    public static boolean actividadesCompletas() { return (actividades.length == maxActividades); }// Devuelve si las actividades están completas
 
     public int getNumActividades() { return actividades.length; } // Devuelve el número actual de actividades en el catálogo
 
-    public int agregarActividad(Actividad actividad) {
+    public static int agregarActividad(Actividad actividad) {
         int resultado;
         if (!actividadesCompletas()) {
             actividades[actividades.length-1] = actividad;

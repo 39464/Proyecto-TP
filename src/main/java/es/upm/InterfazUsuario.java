@@ -45,20 +45,42 @@ public class InterfazUsuario {
     }
 
     private void agregarActividad(Scanner scanner) {
-        System.out.print("Introduzca el nombre de la actividad: ");
+        System.out.print("Nombre de la actividad: ");
         String nombre = scanner.next();
-        System.out.print("Introduzca la descripcion de la actividad: ");
+        System.out.print("Descripcion: ");
         String descripcion = scanner.next();
-        System.out.print("Introduzca la duración de la actividad (en minutos): ");
+        System.out.print("Precio (€): ");
+        double precio = scanner.nextDouble();
+        System.out.print("Duración de la actividad (en minutos): ");
         int duracion = scanner.nextInt();
-        System.out.print("Introduzca los recursos necesarios: ");
-        String recursos = scanner.next();
-        System.out.print("Introduzca los comentarios necesarios: ");
+        System.out.print("Introduzca los recursos (una línea por recurso, 'fin' para terminar): ");
+        String recursos;
+        do{
+            recursos = scanner.next();
+        }while(!recursos.equals("fin"));
+
+        System.out.print("Introduzca los comentarios (una línea por comentario, 'fin' para terminar: ");
+        String comentarios;
+        do{
+            comentarios = scanner.next();
+        }while(!comentarios.equals("fin"));
+
+        Actividad actividad = new Actividad(nombre, 1, 2);
+        if(CatalogoActividades.agregarActividad(actividad)== CatalogoActividades.EXITO){
+            System.out.println("Actividad agregada exitosamente");
+        }
         // Lee los datos de una nueva actividad y la agrega al catálogo
+        /* Fíjate en que el usuario debe introducir los recursos y comentarios de la actividad, una línea por cada uno, y escribir
+            fin para indicar que ha terminado de introducir los datos. En
+            el caso de que la actividad no se haya podido añadir al catálogo, se debe mostrar el error No se pueden añadir más
+            actividades. */
     }
 
     private void consultarActividad(Scanner scanner) {
         Actividad actividadBuscada = buscarActividadPorNombre(scanner);
+        if(actividadBuscada == null){
+            System.out.println("Actividad no encontrada.");
+        }
         // Busca una actividad y permite editarla
     }
 
