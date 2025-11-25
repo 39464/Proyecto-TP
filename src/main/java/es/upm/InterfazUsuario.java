@@ -45,6 +45,15 @@ public class InterfazUsuario {
     }
 
     private void agregarActividad(Scanner scanner) {
+        System.out.print("Introduzca el nombre de la actividad: ");
+        String nombre = scanner.next();
+        System.out.print("Introduzca la descripcion de la actividad: ");
+        String descripcion = scanner.next();
+        System.out.print("Introduzca la duración de la actividad (en minutos): ");
+        int duracion = scanner.nextInt();
+        System.out.print("Introduzca los recursos necesarios: ");
+        String recursos = scanner.next();
+        System.out.print("Introduzca los comentarios necesarios: ");
         // Lee los datos de una nueva actividad y la agrega al catálogo
     }
 
