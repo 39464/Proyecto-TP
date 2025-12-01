@@ -7,5 +7,7 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         CatalogoActividades catalogo = new CatalogoActividades(Integer.parseInt(args[1]));
         // @TODO: Implementar la lógica principal de la aplicación aquí
+
+
     }
 }
