@@ -57,7 +57,7 @@ public class Actividad {
         return 0; // @todo MODIFICAR PARA DEVOLVER EL MÁXIMO DE COMENTARIOS
     }
 
-    public int agregarRecurso(String recurso) {
+    public static int agregarRecurso(String recurso) {
         // Agrega un recurso a la actividad si no se ha alcanzado el máximo.
         return 0; // @todo MODIFICAR PARA DEVOLVER CÓDIGO DE EXITO/ERROR
     }
@@ -103,7 +103,7 @@ public class Actividad {
         return null; // @todo MODIFICAR PARA DEVOLVER LA REPRESENTACIÓN TEXTUAL
     }
 
-    public String toRawString() {
+    public static String toRawString() {
         // Devuelve la representación textual compacta para guardado/carga
         return null; // @todo MODIFICAR PARA DEVOLVER LA REPRESENTACIÓN TEXTUAL COMPACTA
     }
