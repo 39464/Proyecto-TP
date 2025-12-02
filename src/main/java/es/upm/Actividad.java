@@ -82,7 +82,7 @@ public class Actividad {
         return comentarios.length;
     }
 
-    public int agregarRecurso(String recurso) {
+    public int agregarRecurso(String recurso) {  // SE HA ELIMINADO STATIC DEL ESQUELETO ORIGINAL PARA QUE FUNCIONE CON LOS OBJETOS
         // Agrega un recurso a la actividad si no se ha alcanzado el máximo.
         if (recurso == null || recurso.trim().isEmpty()) {
             return ERROR_VALOR_INVALIDO;
@@ -159,10 +159,9 @@ public class Actividad {
         return sb.toString();
     }
 
-    public String toRawString() {
+    public String toRawString() {  // SE HA ELIMINADO STATIC DEL ESQUELETO ORIGINAL
         // Devuelve la representación textual compacta para guardado/carga
         StringBuilder sb = new StringBuilder();
-        // sout concatenación para imprimir valores
         sb.append(nombre).append("\n");
         sb.append(descripcion).append("\n");
         sb.append(precio).append("\n");
@@ -182,7 +181,7 @@ public class Actividad {
         return sb.toString();
     }
 
-    public static Actividad fromBufferedReader(    //  FORMAT EXCEPTION tryCatch -- que si descripcion == null salga error
+    public static Actividad fromBufferedReader(
             BufferedReader reader,
             int maxRecursos,
             int maxComentarios) throws IOException {
@@ -191,9 +190,6 @@ public class Actividad {
         if (nombre == null) return null; // Fin de archivo o error
 
         Actividad actividad = new Actividad(nombre, maxRecursos, maxComentarios);
-
-        // AM: Hay que añadir que el usuario introduzca descripc, precio... adecuado,
-        // hasta que no se introduzca algo válido no deja de preguntar
 
         String descripcion = reader.readLine();
         if (descripcion != null) actividad.setDescripcion(descripcion);
