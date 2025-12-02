@@ -71,10 +71,15 @@ public class CatalogoActividades {
 
     public static Actividad[] buscarActividadPorNombre(String texto) {
         Actividad[] actividadesCoinciden = new Actividad[maxActividades];
+        String textoBuscado = texto.toLowerCase();
+
         for(int i = 0; i < actividades.length; i++){
-            if(actividades[i].getNombre().contains(texto)){
+            if((actividades[i].getNombre()).contains(textoBuscado)){
                 actividadesCoinciden[actividadesCoinciden.length-1]= actividades[i];
             } else{
+                return actividades;
+            }
+            if(!(actividades[i].getNombre()).equals(textoBuscado)){
                 return actividades;
             }
         }
