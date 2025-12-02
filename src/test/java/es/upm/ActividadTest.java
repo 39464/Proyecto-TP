@@ -206,7 +206,7 @@ public class ActividadTest {
     @DisplayName("Formato textual de la actividad para guardar en archivo (toRawString)")
     @CsvSource({
             // nombre,      descripcion,     precio, duracion, recurso1, recurso2, comentario1, comentario2
-            "Museo,         Visita guiada,   12.5,   90,       Entrada, Audioguía, Muy interesante, Guía excelente",
+            "Museo,         Visita guiada,   12.5,   0,       Entrada, Audioguía, Muy interesante, Guía excelente",
             "Ruta en bici,  Nivel medio,     0,      45,       Casco,   Agua,      Bonito recorrido, Buen ritmo",
             "Teatro,        Obra clásica,    18.25,  120,      Entrada, Programa,  Gran actuación,  Sonido impecable"
     })
