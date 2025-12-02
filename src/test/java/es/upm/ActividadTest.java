@@ -1,6 +1,7 @@
 package es.upm;
 
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,11 +10,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests para la clase Actividad")
 public class ActividadTest {
+    @BeforeAll
+    static void fixLocale() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test
     @DisplayName("Constructor de Actividad")

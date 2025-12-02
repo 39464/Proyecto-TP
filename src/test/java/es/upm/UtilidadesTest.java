@@ -1,5 +1,6 @@
 package es.upm;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,10 +8,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 @DisplayName("Tests para la clase Utilidades")
 public class UtilidadesTest {
+
+    @BeforeAll
+    static void fixLocale() {
+        Locale.setDefault(Locale.US);
+    }
 
     @ParameterizedTest
     @DisplayName("Leer cadena de texto")

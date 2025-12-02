@@ -1,5 +1,6 @@
 package es.upm;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
@@ -15,6 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Tests de integración de InterfazUsuario")
 public class InterfazUsuarioTest {
+
+    @BeforeAll
+    static void fixLocale() {
+        Locale.setDefault(Locale.US);
+    }
+
     @Test
     @DisplayName("Menú principal")
     void menuPrincipal() {
@@ -222,7 +230,7 @@ public class InterfazUsuarioTest {
         Scanner scanner = new Scanner(System.in);
         interfaz.iniciar(scanner);
 
-        assertTrue(salidaCapturada.toString().contains("archivo donde guardar las actividades: "), "Hay que solicitar el nombre del archivo donde guardar las actividades");
+        assertTrue(salidaCapturada.toString().contains("Archivo donde guardar las actividades: "), "Hay que solicitar el nombre del archivo donde guardar las actividades");
         assertTrue(salidaCapturada.toString().contains("Actividades guardadas en"), "Hay que avisar al usuario de que las actividades se han guardado correctamente");
     }
 
@@ -276,7 +284,7 @@ public class InterfazUsuarioTest {
         Scanner scanner = new Scanner(System.in);
         interfaz.iniciar(scanner);
 
-        assertTrue(salidaCapturada.toString().contains("archivo donde guardar el itinerario: "), "Hay que solicitar el nombre del archivo donde guardar el itinerario");
+        assertTrue(salidaCapturada.toString().contains("Archivo donde guardar el itinerario: "), "Hay que solicitar el nombre del archivo donde guardar el itinerario");
         assertTrue(salidaCapturada.toString().contains("Itinerario guardado en"), "Hay que avisar al usuario de que el itinerario se ha guardado correctamente");
     }
 }
