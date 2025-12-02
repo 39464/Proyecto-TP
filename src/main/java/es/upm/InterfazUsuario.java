@@ -69,7 +69,8 @@ public class InterfazUsuario {
         }while(!comentario.equals("fin"));
 
         Actividad actividad = new Actividad(nombre, 1, 2);
-        if(CatalogoActividades.agregarActividad(actividad)== CatalogoActividades.EXITO){
+        CatalogoActividades catalogo = new CatalogoActividades(2);
+        if(catalogo.agregarActividad(actividad)== CatalogoActividades.EXITO){
             System.out.println("Actividad agregada exitosamente");
         } else{
 
@@ -117,8 +118,9 @@ public class InterfazUsuario {
         // Lee el nombre del archivo y guarda las actividades del catálogo
     }
     private void guardarActividadesEnArchivo(String nombreArchivo) throws FileNotFoundException {
+        CatalogoActividades catalogo = new CatalogoActividades(2);
         try{
-            CatalogoActividades.guardarActividades(nombreArchivo);
+            catalogo.guardarActividades(nombreArchivo);
         }catch (IOException e){
             System.out.println("IOException al escribir: "+ e.getMessage());
         }
