@@ -181,10 +181,7 @@ public class Actividad {
         return sb.toString();
     }
 
-    public static Actividad fromBufferedReader(
-            BufferedReader reader,
-            int maxRecursos,
-            int maxComentarios) throws IOException {
+    public static Actividad fromBufferedReader( BufferedReader reader, int maxRecursos, int maxComentarios) throws IOException {
         // Devuelve la actividad leída de un BufferedReader
         String nombre = reader.readLine();
         if (nombre == null) return null; // Fin de archivo o error

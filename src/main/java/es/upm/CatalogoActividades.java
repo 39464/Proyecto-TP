@@ -11,36 +11,56 @@ public class CatalogoActividades {
     public static final int ERROR_ACTIVIDAD_NULL = 1;
     public static final int ERROR_DEMASIADOS = 2;
 
-    private static Actividad[] actividades;
+    private static int numActividades;
     private static int maxActividades;
+    private static Actividad[] actividades;
 
     public CatalogoActividades(int maxActividades) {
-        CatalogoActividades.maxActividades = maxActividades;
+        numActividades = 0;
+        this.maxActividades = maxActividades;
         actividades = new Actividad[maxActividades]; }
 
-    public static boolean actividadesCompletas() { return (actividades.length == maxActividades); }// Devuelve si las actividades están completas
+    public static boolean actividadesCompletas() {
+        boolean resultado = false;
+        int i = 0;
+        while (i < actividades.length && actividades[i] != null) {
+            i++;
+        }
+        if (i == actividades.length) {
+            resultado= true;
+        }
+        return resultado;
+    }// Devuelve si las actividades están completas
 
-    public static int getNumActividades() { return actividades.length; } // Devuelve el número actual de actividades en el catálogo
+    public static int getNumActividades() { return actividades.length-1; } // Devuelve el número actual de actividades en el catálogo
 
     public static int agregarActividad(Actividad actividad) {
-        int resultado;
+        int resultado = EXITO;
         if (!actividadesCompletas()) {
-            actividades[actividades.length-1] = actividad;
-            resultado = EXITO;
-        }else{
+            int i = 0;
+            while (i < actividades.length && actividades[i] != null) {
+                i++;
+            }
+            actividades[i] = actividad;
+            numActividades++;
+        } else if (actividad == null) {
+            resultado = ERROR_ACTIVIDAD_NULL;
+        } else {
             resultado = ERROR_DEMASIADOS;
         }
         return resultado; // Agrega una actividad al catálogo si hay espacio disponible
     }
 
     public static boolean eliminarActividad(Actividad seleccionada) {
+        if (seleccionada == null) return false;
         boolean resultado = false;
         int i = 0;
         while (!resultado && i < actividades.length) {
-            if (actividades[i].getNombre().equals(seleccionada.getNombre())) {
+            if ((actividades[i].getNombre()).equals(seleccionada.getNombre())) {
                 actividades[i] = null;
                 for (int j = i+1; j < actividades.length; j++) {
                     actividades[j-1]= actividades[j];
+                    numActividades--;
                 }
                 resultado = true;
             }
@@ -54,6 +74,8 @@ public class CatalogoActividades {
         for(int i = 0; i < actividades.length; i++){
             if(actividades[i].getNombre().contains(texto)){
                 actividadesCoinciden[actividadesCoinciden.length-1]= actividades[i];
+            } else{
+                return actividades;
             }
         }
         return actividadesCoinciden; // Devuelve actividades cuyo nombre contenga el texto indicado
@@ -68,6 +90,9 @@ public class CatalogoActividades {
     }
 
     public static void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo));
+        Actividad.fromBufferedReader(reader, maxRecursos, maxComentarios);
+
         // Carga actividades desde un archivo de texto previamente guardado
     }
 

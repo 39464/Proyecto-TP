@@ -117,20 +117,16 @@ public class InterfazUsuario {
         // Lee el nombre del archivo y guarda las actividades del catálogo
     }
     private void guardarActividadesEnArchivo(String nombreArchivo) throws FileNotFoundException {
-        PrintWriter out = null;
         try{
-            out = new PrintWriter(nombreArchivo);
             CatalogoActividades.guardarActividades(nombreArchivo);
         }catch (IOException e){
             System.out.println("IOException al escribir: "+ e.getMessage());
-        }finally{
-            if(out != null){
-                out.close();
-            }
         }
     }
 
     private void cargarActividades(Scanner scanner) {
+        String nombreArchivo = scanner.next();
+
         // Lee el nombre del archivo y carga actividades al catálogo
     }
 
