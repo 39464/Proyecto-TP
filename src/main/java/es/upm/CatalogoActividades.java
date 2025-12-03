@@ -60,19 +60,21 @@ public class CatalogoActividades {
     }
 
     public Actividad[] buscarActividadPorNombre(String texto) {
-        Actividad[] actividadesCoinciden = new Actividad[maxActividades];
+        Actividad[] coinciden = new Actividad[maxActividades];
+        Actividad[] resultado = new Actividad[0];
         String textoBuscado = texto.toLowerCase();
-        int cont = 0;
 
-        for(int i = 0; i < catalogo.length; i++){
-            if((catalogo[i].getNombre()).contains(textoBuscado)){
-                actividadesCoinciden[this.numActividades-1]= catalogo[i];
-                cont++;
-            } else{
-                return actividadesCoinciden;
+        for(int i = 0; i < numActividades; i++){
+            if((catalogo[i].getNombre().toLowerCase()).contains(textoBuscado)){
+                int j = 0;
+                while(coinciden[j] != null){
+                    j++;
+                }
+                coinciden[j]= catalogo[i];
+                resultado = coinciden;
             }
         }
-        return actividadesCoinciden; // Devuelve actividades cuyo nombre contenga el texto indicado
+        return resultado; // Devuelve actividades cuyo nombre contenga el texto indicado
     }
 
     public void guardarActividades(String nombreArchivo) throws IOException {
