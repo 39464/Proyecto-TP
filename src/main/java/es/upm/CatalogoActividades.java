@@ -80,7 +80,7 @@ public class CatalogoActividades {
     public void guardarActividades(String nombreArchivo) throws IOException {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(nombreArchivo));
-            for (int i = 0; i < numActividades; i++) {
+            for (int i = 0; i < this.numActividades; i++) {
                 out.print(catalogo[i].toRawString());
             }
         }catch (IOException e){
@@ -90,9 +90,20 @@ public class CatalogoActividades {
     }
 
     public void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo));
-        Actividad.fromBufferedReader(reader, maxRecursos, maxComentarios);
-
+        try(BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))){
+            Actividad.fromBufferedReader(reader, maxRecursos, maxComentarios);
+            boolean fin = false;
+            while(!actividadesCompletas() && fin == false){
+                Actividad actividad = Actividad.fromBufferedReader(reader, maxRecursos, maxComentarios);
+                if(actividad != null){
+                    agregarActividad(actividad);
+                } else{
+                    fin = true;
+                }
+            }
+        }catch (IOException e){
+            throw new IOException();
+        }
         // Carga actividades desde un archivo de texto previamente guardado
     }
 
