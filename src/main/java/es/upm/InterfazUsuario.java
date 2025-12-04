@@ -2,13 +2,20 @@ package es.upm;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class InterfazUsuario {
+    public CatalogoActividades catalogo;
+    public Viaje viaje;
+    public int maxRecursos;
+    public int maxComentarios;
+    public int maxActividades;
 
     public InterfazUsuario(CatalogoActividades catalogo, Viaje viaje, int maxRecursos, int maxComentarios) {
-        Scanner scanner = new Scanner(System.in);
+        this.viaje = viaje;
+        this.catalogo = catalogo;
+        this.maxRecursos = maxRecursos;
+        this.maxComentarios = maxComentarios;
         // Crea la interfaz de usuario con el catálogo y viaje proporcionados
     }
 
@@ -48,32 +55,32 @@ public class InterfazUsuario {
     }
 
     private void agregarActividad(Scanner scanner) {
-        System.out.print("Nombre de la actividad: ");
-        String nombre = scanner.next();
-        System.out.print("Descripcion: ");
-        String descripcion = scanner.next();
-        System.out.print("Precio (€): ");
-        double precio = scanner.nextDouble();
-        System.out.print("Duración de la actividad (en minutos): ");
-        int duracion = scanner.nextInt();
+        String nombre = Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
+        String descripcion = Utilidades.leerCadena(scanner,"Descripcion: ");
+        double precio = Utilidades.leerDouble(scanner, "Precio (€): ", 0.0, Double.MAX_VALUE);
+        int duracion = Utilidades.leerNumero(scanner, "Duración de la actividad (en minutos): ", 0, Integer.MAX_VALUE);
+
+        Actividad nueva = new Actividad(nombre, this.maxRecursos, this.maxComentarios);
+        nueva.setDescripcion(descripcion);
+        nueva.setPrecio(precio);
+        nueva.setDuracionMinutos(duracion);
         System.out.print("Introduzca los recursos (una línea por recurso, 'fin' para terminar): ");
-        String recurso;
-        do{
-            recurso = scanner.next();
-        }while(!recurso.equals("fin"));
+        String[] recursos = new String[this.maxRecursos];
+        for(int i = 0; i <= this.maxRecursos && !(scanner.nextLine().equals("fin")); i++){
+            recursos[i] = scanner.nextLine();
+        }
 
         System.out.print("Introduzca los comentarios (una línea por comentario, 'fin' para terminar: ");
-        String comentario;
-        do{
-            comentario = scanner.next();
-        }while(!comentario.equals("fin"));
+        String [] comentarios = new String[this.maxComentarios];
+        for(int i = 0; i <= this.maxRecursos && !(scanner.nextLine().equals("fin")); i++){
+            comentarios[i] = scanner.nextLine();
+        }
 
-        Actividad actividad = new Actividad(nombre, 1, 2);
-        CatalogoActividades catalogo = new CatalogoActividades(2);
-        if(catalogo.agregarActividad(actividad)== CatalogoActividades.EXITO){
+        CatalogoActividades catalogo = new CatalogoActividades(maxActividades);
+        if(catalogo.agregarActividad(nueva)== CatalogoActividades.EXITO){
             System.out.println("Actividad agregada exitosamente");
         } else{
-
+            System.out.println("No se pudo agregar la actividad");
         }
         // Lee los datos de una nueva actividad y la agrega al catálogo
         /* Fíjate en que el usuario debe introducir los recursos y comentarios de la actividad, una línea por cada uno, y escribir
@@ -88,12 +95,20 @@ public class InterfazUsuario {
         if(actividadBuscada == null){
             System.out.println("Actividad no encontrada.");
         }
+
+
         // Busca una actividad y permite editarla
     }
 
     private Actividad buscarActividadPorNombre(Scanner scanner) {
-        System.out.println("Introduzca el nombre de la actividad: ");
-        String nombre = scanner.next();
+        String nombre =  Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
+        Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
+        System.out.println("Actividades encontradas:");
+        for(int i = 0; i < buscadas.length; i++){
+            System.out.println(i+". " + buscadas[i].getNombre());
+        }
+        int opcion = Utilidades.leerNumero(scanner, "Introduzca una opcion: ", 0, buscadas.length-1);
+
         // Busca actividades por nombre y permite seleccionar una
         return null; // @todo MODIFICAR PARA DEVOLVER LA ACTIVIDAD SELECCIONADA
     }
@@ -109,14 +124,14 @@ public class InterfazUsuario {
 
     private void guardarActividades(Scanner scanner) {
         try {
-            System.out.println("Inserte el nombre del archivo donde guardar la actividad: ");
-            String nombreArchivo = scanner.next();
+            String nombreArchivo = Utilidades.leerCadena(scanner, "Nombre del archivo donde guardar la actividad: ");
             guardarActividadesEnArchivo(nombreArchivo);
         }catch (FileNotFoundException ex){
             System.out.println("No se encontro el archivo.");
         }
         // Lee el nombre del archivo y guarda las actividades del catálogo
     }
+
     private void guardarActividadesEnArchivo(String nombreArchivo) throws FileNotFoundException {
         CatalogoActividades catalogo = new CatalogoActividades(2);
         try{
@@ -127,7 +142,7 @@ public class InterfazUsuario {
     }
 
     private void cargarActividades(Scanner scanner) {
-        String nombreArchivo = scanner.next();
+        String nombreArchivo = Utilidades.leerCadena(scanner, "Nombre del archivo del que cargar la actividad: ");
 
         // Lee el nombre del archivo y carga actividades al catálogo
     }
