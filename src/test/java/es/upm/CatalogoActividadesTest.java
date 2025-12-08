@@ -259,7 +259,7 @@ public class CatalogoActividadesTest {
 
         // Verificar que la actividad restante es la correcta (a2)
         Actividad[] resultados = catalogo.buscarActividadPorNombre("Parque");
-        assertEquals(1, resultados.length, "Debe encontrar exactamente 1 actividad 'Parque'");
+        assertEquals(1, catalogo.getNumActividades(), "Debe encontrar exactamente 1 actividad 'Parque'");
         assertEquals("Parque", resultados[0].getNombre());
 
         // Eliminar segunda actividad

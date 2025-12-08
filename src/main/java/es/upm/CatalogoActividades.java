@@ -74,6 +74,7 @@ public class CatalogoActividades {
                 resultado = coinciden;
             }
         }
+        
         return resultado; // Devuelve actividades cuyo nombre contenga el texto indicado
     }
 

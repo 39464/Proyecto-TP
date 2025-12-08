@@ -94,31 +94,66 @@ public class InterfazUsuario {
         Actividad actividadBuscada = buscarActividadPorNombre(scanner);
         if(actividadBuscada == null){
             System.out.println("Actividad no encontrada.");
+        } else {
+            editarActividad(scanner, actividadBuscada);
         }
-
-
         // Busca una actividad y permite editarla
     }
 
     private Actividad buscarActividadPorNombre(Scanner scanner) {
         String nombre =  Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
-        System.out.println("Actividades encontradas:");
-        for(int i = 0; i < buscadas.length; i++){
-            System.out.println(i+". " + buscadas[i].getNombre());
-        }
-        int opcion = Utilidades.leerNumero(scanner, "Introduzca una opcion: ", 0, buscadas.length-1);
-
-        // Busca actividades por nombre y permite seleccionar una
-        return null; // @todo MODIFICAR PARA DEVOLVER LA ACTIVIDAD SELECCIONADA
+        return seleccionarActividad(scanner, buscadas); // Busca actividades por nombre y permite seleccionar una
     }
 
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
-        // Muestra un listado numerado de actividades y permite elegir una
-        return null; // @todo MODIFICAR PARA DEVOLVER LA ACTIVIDAD SELECCIONADA
+        System.out.println("Actividades encontradas:");
+        for(int i = 0; i < actividades.length; i++){
+            System.out.println((i+1)+". " + actividades[i].getNombre());
+        }
+        int opcion = Utilidades.leerNumero(scanner, "Introduzca una opcion: ", 0, actividades.length-1);
+        return actividades[opcion+1]; // Muestra un listado numerado de actividades y permite elegir una
     }
 
     private void editarActividad(Scanner scanner, Actividad seleccionada) {
+        System.out.println(seleccionada.toString());
+        System.out.println("1. Añadir recurso\n2. Añadir comentario\n3. Eliminar actividad\n4. Volver");
+        switch(scanner.nextInt()){
+            case 1:
+                System.out.print("Introduzca el recurso que desea añadir: ");
+                switch(seleccionada.agregarRecurso(scanner.nextLine())) {
+                    case Actividad.ERROR_VALOR_INVALIDO:
+                        System.out.println("Valor inválido.");
+                        break;
+                    case Actividad.ERROR_RECURSOS_COMPLETOS:
+                        System.out.println("Error, recursos completos");
+                        break;
+                    case Actividad.EXITO:
+                        System.out.println("Recurso guardado con éxito");
+                        break;
+                }
+                break;
+            case 2:
+                System.out.print("Introduzca el comentario que desea añadir: ");
+                switch(seleccionada.agregarComentario(scanner.nextLine())) {
+                    case Actividad.ERROR_VALOR_INVALIDO:
+                        System.out.println("Valor inválido.");
+                        break;
+                    case Actividad.ERROR_COMENTARIOS_COMPLETOS:
+                        System.out.println("Error, comentarios completos");
+                        break;
+                    case Actividad.EXITO:
+                        System.out.println("Comentario guardado con éxito");
+                        break;
+                }
+                break;
+            case 3:
+                if(!this.catalogo.eliminarActividad(seleccionada)) System.out.println("No se pudo eliminar la actividad");
+                else System.out.println("Actividad eliminada exitosamente.");
+                break;
+            case 4:
+                break;
+        }
         // Muestra la actividad y permite añadir recursos, comentarios o eliminarla
     }
 
