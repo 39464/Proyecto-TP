@@ -1,7 +1,6 @@
 package es.upm;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class InterfazUsuario {
@@ -177,9 +176,31 @@ public class InterfazUsuario {
     }
 
     private void cargarActividades(Scanner scanner) {
-        String nombreArchivo = Utilidades.leerCadena(scanner, "Nombre del archivo del que cargar la actividad: ");
-
+        String nombreArchivo = Utilidades.leerCadena(scanner, "Nombre del archivo del que cargar las actividades: ");
+        try{
+            cargarActividadesDesdeArchivo(nombreArchivo);
+        }catch(FileNotFoundException ex){
+            System.out.println("No se encontro el archivo.");
+        }
         // Lee el nombre del archivo y carga actividades al catálogo
+    }
+
+    private void cargarActividadesDesdeArchivo(String nombreArchivo) throws FileNotFoundException {
+        CatalogoActividades catalogo = new CatalogoActividades(this.maxActividades);
+        BufferedReader in;
+        try{
+            in = new BufferedReader(new FileReader(nombreArchivo));
+            String linea = in.readLine();
+            int cont = 0;
+            while(cont <= this.maxActividades && linea != null){
+                Actividad nueva = Actividad.fromBufferedReader(in, this.maxRecursos, this.maxComentarios);
+                cont++;
+                if(catalogo.agregarActividad(nueva) == CatalogoActividades.EXITO)
+                    System.out.println("Actividades cargadas correctamente desde "+nombreArchivo);
+            }
+        }catch (IOException e){
+            System.out.println("Error al cargar las actividades");
+        }
     }
 
     private void planificarViaje(Scanner scanner) {
