@@ -12,8 +12,12 @@ public class Utilidades {
     // =========================================================================
 
     public static String leerCadena(Scanner teclado, String s) {
-        System.out.println(s);
-        return teclado.nextLine();
+        String resultado;
+        do{
+            System.out.println(s);
+            resultado = teclado.nextLine();
+        }while(resultado == null || resultado.equals("\n"));
+        return resultado;
     }
 
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {

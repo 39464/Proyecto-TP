@@ -85,7 +85,7 @@ public class CatalogoActividades {
             for (int i = 0; i < this.numActividades; i++) {
                 out.print(this.catalogo[i].toRawString());
             }
-            System.out.println("Actividad guardada correctamente.");
+            System.out.println("Actividades guardadas en"+ nombreArchivo);
         } finally{
             try {
                 if (out != null) out.close();
