@@ -120,15 +120,17 @@ public class InterfazUsuario {
     }
 
     private Actividad buscarActividadPorNombre(Scanner scanner) {
-        String nombre =  Utilidades.leerCadena(scanner,"Elija el nombre de la actividad: ");
+        String nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
         return seleccionarActividad(scanner, buscadas); // Busca actividades por nombre y permite seleccionar una
     }
 
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
-        System.out.println("Actividades encontradas:");
-        for(int i = 0; i < actividades.length; i++){
-            System.out.println((i+1)+". " + actividades[i].getNombre());
+        System.out.println("Actividades encontradas: ");
+        for(int i = 0; i < actividades.length; i++) {
+            if (actividades[i] != null) {
+                System.out.println((i + 1) + ". " + actividades[i].getNombre());
+            }
         }
         int opcion = Utilidades.leerNumero(scanner, "Introduzca una opcion: ", 0, actividades.length-1);
         return actividades[opcion+1]; // Muestra un listado numerado de actividades y permite elegir una
