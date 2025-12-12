@@ -135,7 +135,7 @@ public class Utilidades {
      */
     public static int horaAMinutos(String hora) {
         String[] partes = hora.split(":");
-        return (Integer.parseInt(partes[0])*60) + Integer.parseInt(partes[1]); // Convierte una hora en formato "HH:MM" a minutos desde medianoche
+        return (Integer.parseInt(partes[0])*60) + Integer.parseInt(partes[1]);
     }
 
     /**Pasa los minutos recibidos como parámetro a horas, transcurridas desde medianoche, en formato hh:mm
