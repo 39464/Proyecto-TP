@@ -11,18 +11,31 @@ public class InterfazUsuario {
     public int maxComentarios;
     public int maxActividades;
 
+    /** Constructor del objeto InterfazUsuario con el catálogo y viaje proporcionados
+     *
+     * @param catalogo : objeto CatálogoActividades TODO
+     * @param viaje : objeto Viaje TODO
+     * @param maxRecursos : número máximo de recursos que puede haber por actividad
+     * @param maxComentarios : número máximo de comentarios que puede haber por actividad
+     */
     public InterfazUsuario(CatalogoActividades catalogo, Viaje viaje, int maxRecursos, int maxComentarios) {
         this.viaje = viaje;
         this.catalogo = catalogo;
         this.maxRecursos = maxRecursos;
         this.maxComentarios = maxComentarios;
-        // Crea la interfaz de usuario con el catálogo y viaje proporcionados
     }
 
+    /** Inicia la interfaz de usuario
+     * @param scanner : Objeto Scanner que lee la entrada de teclado
+     */
     public void iniciar(Scanner scanner) {
         menuPrincipal(scanner);
     }
 
+    /** Muestra un menú con opciones y permite al usuario elegir una, hasta que el usuario decida salir
+     *
+     * @param scanner : Objeto Scanner que lee la entrada del teclado, si es un
+     */
     private void menuPrincipal(Scanner scanner) {
         boolean seguir = true;
         while(seguir){
@@ -32,7 +45,8 @@ public class InterfazUsuario {
             try{
                 opcion = Integer.parseInt(input);
             }catch(NumberFormatException e){
-                opcion = -1;
+                opcion = -1; // TODO comprobar que pasa
+                System.out.println("No es una opción válida.");
             }
             switch(opcion){
                 case 1: agregarActividad(scanner); break;
@@ -44,8 +58,9 @@ public class InterfazUsuario {
                 case 7: seguir = false; break;
             }
         }
-    } // Ejecuta el bucle del menú principal hasta que el usuario decida salir
+    }
 
+    /** Muestra las opciones del menú principal */
     private void mostrarMenu() {
         System.out.println("---Menú principal---\n");
         System.out.println("1. Agregar Actividad\n" +
@@ -56,8 +71,12 @@ public class InterfazUsuario {
                 "6. Guardar Itinerario\n" +
                 "7. Salir\n");
         System.out.println("Elige una opcion: ");
-    } // Muestra las opciones del menú principal
+    }
 
+    /** Lee los datos de una nueva actividad y la agrega al catálogo
+     *
+     * @param scanner : objeto Scanner que lee la entrada por teclado
+     */
     private void agregarActividad(Scanner scanner) {
         String nombre = Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
         String descripcion = Utilidades.leerCadena(scanner,"Descripción: ");
@@ -101,14 +120,12 @@ public class InterfazUsuario {
         } else{
             System.out.println("No se pueden añadir más actividades.");
         }
-        // Lee los datos de una nueva actividad y la agrega al catálogo
-        /* Fíjate en que el usuario debe introducir los recursos y comentarios de la actividad, una línea por cada uno, y escribir
-            fin para indicar que ha terminado de introducir los datos. En
-            el caso de que la actividad no se haya podido añadir al catálogo,
-            se debe mostrar el error No se pueden añadir más
-            actividades. */
     }
 
+    /** Permite buscar una actividad y editarla
+     *
+     * @param scanner : objeto Scanner que lee la entrada por teclado
+     */
     private void consultarActividad(Scanner scanner) {
         Actividad actividadBuscada = buscarActividadPorNombre(scanner);
         if(actividadBuscada == null){
@@ -116,9 +133,12 @@ public class InterfazUsuario {
         } else {
             editarActividad(scanner, actividadBuscada);
         }
-        // Busca una actividad y permite editarla
     }
 
+    /**
+     * @param scanner :
+     * @return
+     */
     private Actividad buscarActividadPorNombre(Scanner scanner) {
         String nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);

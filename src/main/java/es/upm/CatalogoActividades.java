@@ -1,6 +1,11 @@
 package es.upm;
 import java.io.*;
 
+/**@author Irene Lombardo Cabrera
+ * @author Almudena Moyano Londoño
+ *
+ * Clase con métodos de gestión de un catálogo de actividades
+ */
 public class CatalogoActividades {
 
     public static final int EXITO = 0;
@@ -11,11 +16,19 @@ public class CatalogoActividades {
     private int maxActividades;
     private Actividad[] catalogo;
 
+    /** Constructor del catálogo
+     *
+     * @param maxActividades : máximo de actividades que puede albergar el array del catálogo
+     */
     public CatalogoActividades(int maxActividades) {
         this.numActividades = 0;
         this.maxActividades = maxActividades;
         this.catalogo = new Actividad[maxActividades]; }
 
+    /** Comprueba si el catálogo de actividades está lleno
+     *
+     * @return : true si el catálogo ha alcanzado su capacidad máxima
+     */
     public boolean actividadesCompletas() {
         boolean resultado = false;
         int i = 0;
@@ -26,10 +39,19 @@ public class CatalogoActividades {
             resultado= true;
         }
         return resultado;
-    }// Devuelve si las actividades están completas
+    }
 
-    public int getNumActividades() { return numActividades; } // Devuelve el número actual de actividades en el catálogo
+    /** Getter de numActividades
+     *
+     * @return : número actual de actividades en el catálogo
+     */
+    public int getNumActividades() { return numActividades; }
 
+    /** Agrega una actividad al catálogo si hay espacio disponible
+     *
+     * @param actividad : actividad a agregar en el catalogo
+     * @return : entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     */
     public int agregarActividad(Actividad actividad) {
         int resultado = EXITO;
         if (actividad == null) resultado = ERROR_ACTIVIDAD_NULL;
@@ -38,9 +60,14 @@ public class CatalogoActividades {
             catalogo[numActividades] = actividad;
             numActividades++;
         }
-        return resultado; // Agrega una actividad al catálogo si hay espacio disponible
+        return resultado;
     }
 
+    /** Elimina la actividad cuyo nombre sea el seleccionado
+     *
+     * @param seleccionada : actividad para buscar y eliminar
+     * @return : entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     */
     public boolean eliminarActividad(Actividad seleccionada) {
         boolean resultado = false;
         int i = 0;
@@ -56,9 +83,14 @@ public class CatalogoActividades {
             i++;
         }
         if(i == 0) resultado = false;
-        return resultado; // Elimina la actividad cuyo nombre sea el seleccionado
+        return resultado;
     }
 
+    /** Busca actividades cuyo nombre contenga un texto
+     *
+     * @param texto : texto a buscar entre los nombres de las actividades del catálogo
+     * @return : Array de actividades cuyo nombre contenga el texto recibido como parámetro
+     */
     public Actividad[] buscarActividadPorNombre(String texto) {
         Actividad[] coinciden = new Actividad[maxActividades];
         Actividad[] resultado = new Actividad[0];
@@ -75,9 +107,14 @@ public class CatalogoActividades {
             }
         }
         
-        return resultado; // Devuelve actividades cuyo nombre contenga el texto indicado
+        return resultado;
     }
 
+    /** Guarda todas las actividades en un archivo de texto, utilizando su representación compacta
+     *
+     * @param nombreArchivo : nombre del archivo que se desea crear para contener las actividades del catálogo
+     * @throws IOException : error al escribir el archivo
+     */
     public void guardarActividades(String nombreArchivo) throws IOException {
         PrintWriter out = null;
         try{
@@ -93,9 +130,15 @@ public class CatalogoActividades {
                 System.out.println("Error al cerrar el archivo.");
             }
         }
-        // Guarda todas las actividades en un archivo de texto usando su representación compacta
     }
 
+    /** Carga actividades desde un archivo de texto previamente guardado
+     *
+     * @param nombreArchivo : String que indique el nombre del archivo del cual extraer las actividades
+     * @param maxRecursos : número máximo de recursos que se pueden cargar
+     * @param maxComentarios : número máximo de comentarios que se pueden cargar
+     * @throws IOException : error al escribir el archivo
+     */
     public void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
         BufferedReader in = null;
         try{
@@ -116,10 +159,5 @@ public class CatalogoActividades {
                 System.out.println("Error al cerrar el archivo.");
             }
         }
-        // Carga actividades desde un archivo de texto previamente guardado
     }
-
-    /*se deben lanzar las excepciones para que sean
-    manejadas en el metodo que llama a guardarActividades y
-    cargarActividades.*/
 }
