@@ -1,5 +1,6 @@
 package es.upm;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
@@ -15,6 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Tests de integración de InterfazUsuario")
 public class InterfazUsuarioTest {
+
+    @BeforeAll
+    static void fixLocale() {
+        Locale.setDefault(Locale.US);
+    }
+
     @Test
     @DisplayName("Menú principal")
     void menuPrincipal() {
