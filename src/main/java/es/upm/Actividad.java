@@ -5,6 +5,8 @@ import java.io.IOException;
 
 public class Actividad {
 
+    //
+
     // ---------------------------
     // Constantes de códigos de error
     // ---------------------------
@@ -161,7 +163,7 @@ public class Actividad {
 
     public String toRawString() {  // SE HA ELIMINADO STATIC DEL ESQUELETO ORIGINAL
         // Devuelve la representación textual compacta para guardado/carga
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();   // CAMBIAR STRINGBUILDER
         sb.append(nombre).append("\n");
         sb.append(descripcion).append("\n");
         sb.append(precio).append("\n");
