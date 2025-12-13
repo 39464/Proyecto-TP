@@ -62,7 +62,7 @@ public class InterfazUsuario {
 
     /** Muestra las opciones del menú principal */
     private void mostrarMenu() {
-        System.out.println("---Menú principal---\n");
+        System.out.println("\n---Menú principal---\n");
         System.out.println("1. Agregar Actividad\n" +
                 "2. Consultar/Editar Actividad\n" +
                 "3. Guardar Actividades\n"+
@@ -88,10 +88,11 @@ public class InterfazUsuario {
         nueva.setPrecio(precio);
         nueva.setDuracionMinutos(duracion);
 
+        scanner.nextLine();
         System.out.print("Introduce los recursos (una línea por recurso, escribe 'fin' para terminar):");
         String resultadoR = "";
         while(!resultadoR.equals("fin")){
-            resultadoR = scanner.nextLine();
+            resultadoR = Utilidades.leerCadena(scanner, "");
             if(!resultadoR.equals("fin")){
                 int recursos = nueva.agregarRecurso(resultadoR);
                 if(recursos == Actividad.ERROR_RECURSOS_COMPLETOS){
@@ -110,8 +111,13 @@ public class InterfazUsuario {
             resultadoC = Utilidades.leerCadena(scanner, "");
             if(!resultadoC.equals("fin")){
                 int comentarios = nueva.agregarComentario(resultadoC);
-                if(comentarios == Actividad.ERROR_COMENTARIOS_COMPLETOS) System.out.println("No se pueden añadir más recursos"); resultadoR = "fin";
-                if(comentarios == Actividad.ERROR_VALOR_INVALIDO) System.out.println("El recurso es invalido"); resultadoR = "fin";
+                if(comentarios == Actividad.ERROR_COMENTARIOS_COMPLETOS) {
+                    System.out.println("No se pueden añadir más comentarios");
+                    resultadoC = "fin";
+                }else if(comentarios == Actividad.ERROR_VALOR_INVALIDO) {
+                    System.out.println("El comentario es invalido");
+                    resultadoC = "fin";
+                }
             }
         }
 
@@ -139,29 +145,29 @@ public class InterfazUsuario {
      * @param scanner :
      * @return
      */
-    private Actividad buscarActividadPorNombre(Scanner scanner) {
+    private Actividad buscarActividadPorNombre(Scanner scanner) { //TODO
         String nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
         return seleccionarActividad(scanner, buscadas); // Busca actividades por nombre y permite seleccionar una
     }
 
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
-        System.out.println("Actividades encontradas: ");
+        System.out.println("Actividades encontradas:");
         for(int i = 0; i < actividades.length; i++) {
             if (actividades[i] != null) {
                 System.out.println((i + 1) + ". " + actividades[i].getNombre());
             }
         }
-        int opcion = Utilidades.leerNumero(scanner, "Introduzca una opcion: ", 0, actividades.length-1);
+        int opcion = Utilidades.leerNumero(scanner, "Elija una actividad: ", 0, actividades.length-1);
         return actividades[opcion+1]; // Muestra un listado numerado de actividades y permite elegir una
     }
 
     private void editarActividad(Scanner scanner, Actividad seleccionada) {
-        System.out.println(seleccionada.toString());
         System.out.println("1. Añadir recurso\n2. Añadir comentario\n3. Eliminar actividad\n4. Volver");
-        switch(scanner.nextInt()){
+        int opcion = Utilidades.leerNumero(scanner, "Elija una opción:\n", 1, 4);
+        switch(opcion){
             case 1:
-                System.out.print("Introduzca el recurso que desea añadir: ");
+                System.out.print("Introduce el recurso a añadir: ");
                 switch(seleccionada.agregarRecurso(scanner.nextLine())) {
                     case Actividad.ERROR_VALOR_INVALIDO:
                         System.out.println("Valor inválido.");
@@ -175,7 +181,7 @@ public class InterfazUsuario {
                 }
                 break;
             case 2:
-                System.out.print("Introduzca el comentario que desea añadir: ");
+                System.out.print("Introduce el comentario a añadir: ");
                 switch(seleccionada.agregarComentario(scanner.nextLine())) {
                     case Actividad.ERROR_VALOR_INVALIDO:
                         System.out.println("Valor inválido.");

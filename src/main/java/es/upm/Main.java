@@ -9,10 +9,10 @@ public class Main {
                     "Uso correcto: <maxRecursosPorActividad>, <maxComentariosPorActividad>, <maxActividadesEnCatalogo>" +
                     ", <numDiasViaje>, <maxActividadesPorDia>, <nombreArchivoActividades (opcional)>");
         }
-
         Scanner teclado = new Scanner(System.in);
         CatalogoActividades catalogo = new CatalogoActividades(Integer.parseInt(args[2]));
-        Viaje viaje = new Viaje();
-        // @TODO: Implementar la lógica principal de la aplicación aquí
+        Viaje viaje = new Viaje(Integer.parseInt(args[3]), Integer.parseInt(args[4]));
+        InterfazUsuario interfaz = new InterfazUsuario(catalogo, viaje, Integer.parseInt(args[0]), Integer.parseInt(args[1]));;
+        interfaz.iniciar(teclado);
     }
 }
