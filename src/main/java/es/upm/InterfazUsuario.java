@@ -38,7 +38,7 @@ public class InterfazUsuario {
      */
     private void menuPrincipal(Scanner scanner) {
         boolean seguir = true;
-        while(seguir){
+        do{
             mostrarMenu();
             String input = scanner.nextLine();
             int opcion;
@@ -57,7 +57,7 @@ public class InterfazUsuario {
                 case 6: guardarItinerario(scanner); break;
                 case 7: seguir = false; break;
             }
-        }
+        } while(seguir);
     }
 
     /** Muestra las opciones del menú principal */
@@ -146,8 +146,16 @@ public class InterfazUsuario {
      * @return
      */
     private Actividad buscarActividadPorNombre(Scanner scanner) { //TODO
-        String nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
+        String nombre = "";
+        boolean resultado = true;
+        while(resultado){
+            nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
+            if(nombre.equals("-FIN-")) resultado = false;
+            }
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
+        if(buscadas == null || buscadas.length == 0){
+            System.out.println("Actividad no encontrada.");
+        }
         return seleccionarActividad(scanner, buscadas); // Busca actividades por nombre y permite seleccionar una
     }
 
@@ -158,11 +166,12 @@ public class InterfazUsuario {
                 System.out.println((i + 1) + ". " + actividades[i].getNombre());
             }
         }
-        int opcion = Utilidades.leerNumero(scanner, "Elija una actividad: ", 0, actividades.length-1);
-        return actividades[opcion+1]; // Muestra un listado numerado de actividades y permite elegir una
+        int opcion = Utilidades.leerNumero(scanner, "Elija una actividad: ", 1, actividades.length);
+        return actividades[opcion-1]; // Muestra un listado numerado de actividades y permite elegir una
     }
 
     private void editarActividad(Scanner scanner, Actividad seleccionada) {
+        System.out.println(seleccionada.toString());
         System.out.println("1. Añadir recurso\n2. Añadir comentario\n3. Eliminar actividad\n4. Volver");
         int opcion = Utilidades.leerNumero(scanner, "Elija una opción:\n", 1, 4);
         switch(opcion){
@@ -227,6 +236,7 @@ public class InterfazUsuario {
         String nombreArchivo = Utilidades.leerCadena(scanner, "Archivo de donde cargar las actividades: ");
         try{
             cargarActividadesDesdeArchivo(nombreArchivo);
+            System.out.println("Actividades cargadas desde "+ nombreArchivo);
         }catch(FileNotFoundException ex){
             System.out.println("No se encontro el archivo.");
         }
