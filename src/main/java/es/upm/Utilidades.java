@@ -19,12 +19,8 @@ public class Utilidades {
      * @return : String escrito por teclado
      */
     public static String leerCadena(Scanner teclado, String s) {
-        String resultado;
-        do{
-            System.out.println(s);
-            resultado = teclado.nextLine();
-        }while(resultado == null || resultado.equals("\n"));
-        return resultado;
+        System.out.println(s);
+        return teclado.nextLine();
     }
 
     /**Lee un número entero por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo]

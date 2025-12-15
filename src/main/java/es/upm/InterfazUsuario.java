@@ -150,8 +150,8 @@ public class InterfazUsuario {
         boolean resultado = true;
         while(resultado){
             nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
-            if(nombre.equals("-FIN-")) resultado = false;
-            }
+            if(nombre.equals("-FIN-") || nombre != null) resultado = false;
+        }
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
         if(buscadas == null || buscadas.length == 0){
             System.out.println("Actividad no encontrada.");
@@ -205,7 +205,7 @@ public class InterfazUsuario {
                 break;
             case 3:
                 if(!this.catalogo.eliminarActividad(seleccionada)) System.out.println("No se pudo eliminar la actividad");
-                else System.out.println("Actividad eliminada exitosamente.");
+                else System.out.println("Actividad eliminada.");
                 break;
             case 4:
                 break;
