@@ -141,7 +141,8 @@ public class InterfazUsuario {
         }
     }
 
-    /** Busca actividades por nombre dentro del catálogo, crea un array con actividades (llamando a seleccionarActividad) que coincidan y permite seleccionar una
+    /** Busca actividades por nombre dentro del catálogo, crea un array con actividades (llamando a seleccionarActividad)
+     * que coincidan y permite seleccionar una
      *
      * @param scanner : objeto Scanner que lee la entrada por teclado
      * @return : objeto Actividad cuyo nombre contiene el texto introducido por teclado
@@ -163,7 +164,8 @@ public class InterfazUsuario {
     /** Muestra un listado numerado de actividades y permite elegir una
      *
      * @param scanner : objeto Scanner que lee la entrada por teclado
-     * @param actividades : array de objetos Actividad cuyo nombre coincide con el nombre introducido en el metodo buscarActividadPorNombre
+     * @param actividades : array de objetos Actividad cuyo nombre coincide con el nombre introducido en el
+     *                    metodo buscarActividadPorNombre
      * @return : objeto Actividad elegido por el usuario
      */
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
