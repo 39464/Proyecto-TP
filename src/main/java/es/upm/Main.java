@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     /** Clase de donde se ejecuta el programa
      *
-     * @param args : define los distintos enteros necesarios a lo largo del programa: máximo de recursos y comentarios
+     * @param args define los distintos enteros necesarios a lo largo del programa: máximo de recursos y comentarios
      *             por actividad, máximo de actividades en catálogo, número de días de viaje, máximo de actividades por
      *             día, y nombre del archivo de donde cargar las actividades (opcional)
      */

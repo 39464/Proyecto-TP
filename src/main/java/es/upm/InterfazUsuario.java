@@ -13,10 +13,10 @@ public class InterfazUsuario {
 
     /** Constructor del objeto InterfazUsuario con el catálogo y viaje proporcionados
      *
-     * @param catalogo : objeto CatálogoActividades TODO
-     * @param viaje : objeto Viaje TODO
-     * @param maxRecursos : número máximo de recursos que puede haber por actividad
-     * @param maxComentarios : número máximo de comentarios que puede haber por actividad
+     * @param catalogo objeto CatálogoActividades que recoge todas las actividades
+     * @param viaje objeto Viaje que recoge el itinerario
+     * @param maxRecursos número máximo de recursos que puede haber por actividad
+     * @param maxComentarios número máximo de comentarios que puede haber por actividad
      */
     public InterfazUsuario(CatalogoActividades catalogo, Viaje viaje, int maxRecursos, int maxComentarios) {
         this.viaje = viaje;
@@ -26,7 +26,7 @@ public class InterfazUsuario {
     }
 
     /** Inicia la interfaz de usuario
-     * @param scanner : Objeto Scanner que lee la entrada de teclado
+     * @param scanner Objeto Scanner que lee la entrada de teclado
      */
     public void iniciar(Scanner scanner) {
         menuPrincipal(scanner);
@@ -34,7 +34,7 @@ public class InterfazUsuario {
 
     /** Muestra un menú con opciones y permite al usuario elegir una, hasta que el usuario decida salir
      *
-     * @param scanner : Objeto Scanner que lee la entrada del teclado, si es un
+     * @param scanner Objeto Scanner que lee la entrada del teclado, si es un
      */
     private void menuPrincipal(Scanner scanner) {
         boolean seguir = true;
@@ -45,7 +45,7 @@ public class InterfazUsuario {
             try{
                 opcion = Integer.parseInt(input);
             }catch(NumberFormatException e){
-                opcion = -1; // TODO comprobar que pasa
+                opcion = -1;
                 System.out.println("No es una opción válida.");
             }
             switch(opcion){
@@ -75,7 +75,7 @@ public class InterfazUsuario {
 
     /** Lee los datos de una nueva actividad y la agrega al catálogo
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
+     * @param scanner objeto Scanner que lee la entrada por teclado
      */
     private void agregarActividad(Scanner scanner) {
         String nombre = Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
@@ -130,7 +130,7 @@ public class InterfazUsuario {
 
     /** Permite buscar una actividad y editarla
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
+     * @param scanner objeto Scanner que lee la entrada por teclado
      */
     private void consultarActividad(Scanner scanner) {
         Actividad actividadBuscada = buscarActividadPorNombre(scanner);
@@ -144,8 +144,8 @@ public class InterfazUsuario {
     /** Busca actividades por nombre dentro del catálogo, crea un array con actividades (llamando a seleccionarActividad)
      * que coincidan y permite seleccionar una
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
-     * @return : objeto Actividad cuyo nombre contiene el texto introducido por teclado
+     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @return objeto Actividad cuyo nombre contiene el texto introducido por teclado
      */
     private Actividad buscarActividadPorNombre(Scanner scanner) {
         String nombre = "";
@@ -163,10 +163,10 @@ public class InterfazUsuario {
 
     /** Muestra un listado numerado de actividades y permite elegir una
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
-     * @param actividades : array de objetos Actividad cuyo nombre coincide con el nombre introducido en el
+     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param actividades array de objetos Actividad cuyo nombre coincide con el nombre introducido en el
      *                    metodo buscarActividadPorNombre
-     * @return : objeto Actividad elegido por el usuario
+     * @return objeto Actividad elegido por el usuario
      */
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
         System.out.println("Actividades encontradas:");
@@ -181,8 +181,8 @@ public class InterfazUsuario {
 
     /** Muestra un menú con opciones y permite añadir recursos a la actividad, añadir comentarios, o eliminar la actividad
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
-     * @param seleccionada : objeto Actividad que se desea modificar
+     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param seleccionada objeto Actividad que se desea modificar
      */
     private void editarActividad(Scanner scanner, Actividad seleccionada) {
         System.out.println(seleccionada.toString());
@@ -228,7 +228,7 @@ public class InterfazUsuario {
 
     /** Lee el nombre del archivo y permite guardar las actividades en un archivo, llamando a guardarActividadesEnArchivo
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
+     * @param scanner objeto Scanner que lee la entrada por teclado
      */
     private void guardarActividades(Scanner scanner) {
         try {
@@ -241,7 +241,7 @@ public class InterfazUsuario {
 
     /** Llama al metodo guardarActividades de la clase CatalogoActividades para guardar el catálogo del objeto en un archivo
      *
-     * @param nombreArchivo : String que indica el nombre del archivo
+     * @param nombreArchivo String que indica el nombre del archivo
      * @throws FileNotFoundException
      */
     private void guardarActividadesEnArchivo(String nombreArchivo) throws FileNotFoundException {
@@ -255,7 +255,7 @@ public class InterfazUsuario {
 
     /** Lee el nombre de un archivo y llama a cargarActividadesDesdeArchivo para crear un nuevo catálogo
      *
-     * @param scanner : objeto Scanner que lee la entrada por teclado
+     * @param scanner objeto Scanner que lee la entrada por teclado
      */
     private void cargarActividades(Scanner scanner) {
         String nombreArchivo = Utilidades.leerCadena(scanner, "Archivo de donde cargar las actividades: ");
@@ -269,7 +269,7 @@ public class InterfazUsuario {
 
     /** Carga las actividades dentro de un archivo a un nuevo catálogo, mediante un BufferedReader
      *
-     * @param nombreArchivo : String que indica el nombre del archivo
+     * @param nombreArchivo String que indica el nombre del archivo
      * @throws FileNotFoundException
      */
     private void cargarActividadesDesdeArchivo(String nombreArchivo) throws FileNotFoundException {

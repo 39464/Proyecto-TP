@@ -18,7 +18,7 @@ public class CatalogoActividades {
 
     /** Constructor del catálogo
      *
-     * @param maxActividades : máximo de actividades que puede albergar el array del catálogo
+     * @param maxActividades máximo de actividades que puede albergar el array del catálogo
      */
     public CatalogoActividades(int maxActividades) {
         this.numActividades = 0;
@@ -27,7 +27,7 @@ public class CatalogoActividades {
 
     /** Comprueba si el catálogo de actividades está lleno
      *
-     * @return : true si el catálogo ha alcanzado su capacidad máxima
+     * @return true si el catálogo ha alcanzado su capacidad máxima
      */
     public boolean actividadesCompletas() {
         boolean resultado = false;
@@ -43,14 +43,14 @@ public class CatalogoActividades {
 
     /** Getter de numActividades
      *
-     * @return : número actual de actividades en el catálogo
+     * @return número actual de actividades en el catálogo
      */
     public int getNumActividades() { return numActividades; }
 
     /** Agrega una actividad al catálogo si hay espacio disponible
      *
-     * @param actividad : actividad a agregar en el catalogo
-     * @return : entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     * @param actividad actividad a agregar en el catalogo
+     * @return entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
      */
     public int agregarActividad(Actividad actividad) {
         int resultado = EXITO;
@@ -65,8 +65,8 @@ public class CatalogoActividades {
 
     /** Elimina la actividad cuyo nombre sea el seleccionado
      *
-     * @param seleccionada : actividad para buscar y eliminar
-     * @return : entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     * @param seleccionada actividad para buscar y eliminar
+     * @return entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
      */
     public boolean eliminarActividad(Actividad seleccionada) {
         boolean resultado = false;
@@ -88,8 +88,8 @@ public class CatalogoActividades {
 
     /** Busca actividades cuyo nombre contenga un texto
      *
-     * @param texto : texto a buscar entre los nombres de las actividades del catálogo
-     * @return : Array de actividades cuyo nombre contenga el texto recibido como parámetro
+     * @param texto texto a buscar entre los nombres de las actividades del catálogo
+     * @return Array de actividades cuyo nombre contenga el texto recibido como parámetro
      */
     public Actividad[] buscarActividadPorNombre(String texto) {
         Actividad[] coinciden = new Actividad[maxActividades];
@@ -112,8 +112,8 @@ public class CatalogoActividades {
 
     /** Guarda todas las actividades en un archivo de texto, utilizando su representación compacta
      *
-     * @param nombreArchivo : nombre del archivo que se desea crear para contener las actividades del catálogo
-     * @throws IOException : error al escribir el archivo
+     * @param nombreArchivo nombre del archivo que se desea crear para contener las actividades del catálogo
+     * @throws IOException error al escribir el archivo
      */
     public void guardarActividades(String nombreArchivo) throws IOException {
         PrintWriter out = null;
@@ -134,10 +134,10 @@ public class CatalogoActividades {
 
     /** Carga actividades desde un archivo de texto previamente guardado
      *
-     * @param nombreArchivo : String que indique el nombre del archivo del cual extraer las actividades
-     * @param maxRecursos : número máximo de recursos que se pueden cargar
-     * @param maxComentarios : número máximo de comentarios que se pueden cargar
-     * @throws IOException : error al escribir el archivo
+     * @param nombreArchivo String que indique el nombre del archivo del cual extraer las actividades
+     * @param maxRecursos número máximo de recursos que se pueden cargar
+     * @param maxComentarios número máximo de comentarios que se pueden cargar
+     * @throws IOException error al escribir el archivo
      */
     public void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
         BufferedReader in = null;
