@@ -1,11 +1,15 @@
 package es.upm;
 import java.io.*;
 
-/**@author Irene Lombardo Cabrera
+/**
+ * @author Irene Lombardo Cabrera
  * @author Almudena Moyano Londoño
+ *
+ * @version 1.0
  *
  * Clase con métodos de gestión de un catálogo de actividades
  */
+
 public class CatalogoActividades {
 
     public static final int EXITO = 0;

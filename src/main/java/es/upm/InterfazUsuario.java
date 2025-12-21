@@ -4,6 +4,15 @@ import java.io.*;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
+/**
+ * @author Irene Lombardo Cabrera
+ * @author Almudena Moyano Londoño
+ *
+ * @version 1.0
+ *
+ * Gestiona la interacción con el usuario a través de la consola.
+ */
+
 public class InterfazUsuario {
     public CatalogoActividades catalogo;
     public Viaje viaje;

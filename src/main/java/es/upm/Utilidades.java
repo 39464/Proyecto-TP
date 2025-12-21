@@ -3,13 +3,15 @@ package es.upm;
 import java.util.Locale;
 import java.util.Scanner;
 
-/**@author Irene Lombardo Cabrera
+/**
+ * @author Irene Lombardo Cabrera
  * @author Almudena Moyano Londoño
  *
  * @version 1.0
  *
  * Clase con métodos de utilidad para la entrada de datos por teclado y conversión de formatos.
  */
+
 public class Utilidades {
 
     /**Lee un String por entrada de teclado

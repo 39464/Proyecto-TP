@@ -3,9 +3,17 @@ package es.upm;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class Actividad {
+/**
+ * @author Irene Lombardo Cabrera
+ * @author Almudena Moyano Londoño
+ *
+ * @version 1.0
+ *
+ * Representa una actividad turística con nombre, descripción, precio, duración,
+ * recursos y comentarios.
+ */
 
-    //
+public class Actividad {
 
     // ---------------------------
     // Constantes de códigos de error

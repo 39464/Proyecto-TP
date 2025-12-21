@@ -1,6 +1,16 @@
 package es.upm;
 import java.io.*;
 
+/**
+ * @author Irene Lombardo Cabrera
+ * @author Almudena Moyano Londoño
+ *
+ * @version 1.0
+ *
+ * Gestiona la planificación de un viaje organizando actividades por días
+ * y controlando horarios y solapamientos
+ */
+
 public class Viaje {
     // ---------------------------
     // Constantes de códigos de error
