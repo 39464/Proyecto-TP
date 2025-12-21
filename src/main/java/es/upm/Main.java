@@ -9,11 +9,11 @@ import java.util.Scanner;
  *
  * @version 1.0
  *
- * Clase principal de la aplicación que se encarga de arrancar el programa
+ * Clase principal de la aplicación.
  */
 
 public class Main {
-    /** Clase de donde se ejecuta el programa
+    /** Se ejecuta el programa
      *
      * @param args define los distintos enteros necesarios a lo largo del programa: máximo de recursos y comentarios
      *             por actividad, máximo de actividades en catálogo, número de días de viaje, máximo de actividades por

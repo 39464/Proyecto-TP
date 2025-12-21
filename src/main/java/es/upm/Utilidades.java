@@ -14,29 +14,29 @@ import java.util.Scanner;
 
 public class Utilidades {
 
-    /**Lee un String por entrada de teclado
+    /** Lee un String por entrada de teclado.
      *
-     * @param teclado Scanner, lee la entrada del teclado
-     * @param s Mensaje escrito en pantalla, pregunta al usuario por un string
-     * @return String escrito por teclado
+     * @param teclado Scanner que lee la entrada del teclado.
+     * @param s Mensaje escrito en pantalla que pregunta al usuario por un String.
+     * @return String escrito por teclado.
      */
     public static String leerCadena(Scanner teclado, String s) {
         System.out.println(s);
         return teclado.nextLine();
     }
 
-    /**Lee un número entero por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo]
+    /** Lee un número entero por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
      *
-     * @param teclado Scanner, lee la entrada del teclado
-     * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un entero
-     * @param minimo Valor mínimo que puede tomar la entrada
-     * @param maximo Valor máximo que puede tomar la entrada
-     * @return Número escrito por teclado, que esté dentro del intervalo
+     * @param teclado Scanner que lee la entrada del teclado.
+     * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un entero.
+     * @param minimo Valor mínimo que puede tomar la entrada.
+     * @param maximo Valor máximo que puede tomar la entrada.
+     * @return Número escrito por teclado, que esté dentro del intervalo.
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int resultado = 0;
         boolean esValido = false;
-        do{
+        do {
             System.out.println(mensaje);
             if (teclado.hasNextInt()) {
                 resultado = teclado.nextInt();
@@ -54,13 +54,13 @@ public class Utilidades {
         return resultado;
     }
 
-    /**Lee un número decimal por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo]
+    /** Lee un número decimal por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
      *
-     * @param teclado Scanner, lee la entrada del teclado
-     * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un double
-     * @param minimo Valor mínimo que puede tomar la entrada
-     * @param maximo Valor máximo que puede tomar la entrada
-     * @return Número escrito por teclado, que esté dentro del intervalo
+     * @param teclado Scanner que lee la entrada del teclado.
+     * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un double.
+     * @param minimo Valor mínimo que puede tomar la entrada.
+     * @param maximo Valor máximo que puede tomar la entrada.
+     * @return Número escrito por teclado, que esté dentro del intervalo.
      */
     public static double leerDouble(Scanner teclado, String mensaje, double minimo, double maximo) {
         teclado = teclado.useLocale(Locale.US);
@@ -76,7 +76,7 @@ public class Utilidades {
                     System.out.println("El número debe estar entre " + minimo + " y " + maximo);
                     teclado.nextLine();
                 }
-            }else{
+            }else {
             System.out.println("Por favor, introduce un número válido.");
             teclado.nextLine();
             }
@@ -84,11 +84,11 @@ public class Utilidades {
         return resultado;
     }
 
-    /**Lee una hora por entrada de teclado, comprueba que esté en el formato hh:mm
+    /** Lee una hora por entrada de teclado, comprueba que esté en el formato hh:mm.
      *
-     * @param teclado Scanner, lee la entrada de teclado
-     * @param mensaje Mensaje para imprimir por pantalla, pide una hora en formato hh:mm
-     * @return hora en el formato correcto
+     * @param teclado Scanner que lee la entrada de teclado.
+     * @param mensaje Mensaje para imprimir por pantalla, pide una hora en formato hh:mm.
+     * @return Hora en el formato correcto.
      */
     public static String leerHora(Scanner teclado, String mensaje) {
         boolean esValido = false;
@@ -105,10 +105,10 @@ public class Utilidades {
                             if (minuto < 60 && minuto >= 0){
                                 esValido = true;
                                 resultado = horaEntrada;
-                            } else{
+                            } else {
                                 System.out.println("Los minutos deben estar entre 00 y 59");
                             }
-                        } else{
+                        } else {
                             System.out.println("Las horas deben estar entre 00 y 23");
                         }
                     }
@@ -126,20 +126,20 @@ public class Utilidades {
     // Métodos de conversión de formatos
     // =========================================================================
 
-    /**Calcula los minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
+    /** Calcula los minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
      *
-     * @param hora hora en formato hh:mm
-     * @return los minutos que han pasado desde medianoche hasta la hora recibida como parámetro
+     * @param hora Hora en formato hh:mm.
+     * @return Minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
      */
     public static int horaAMinutos(String hora) {
         String[] partes = hora.split(":");
         return (Integer.parseInt(partes[0])*60) + Integer.parseInt(partes[1]);
     }
 
-    /**Pasa los minutos recibidos como parámetro a horas, transcurridas desde medianoche, en formato hh:mm
+    /** Pasa los minutos recibidos como parámetro a horas, transcurridas desde medianoche, en formato hh:mm.
      *
-     * @param minutos Minutos que se desean convertir a horas
-     * @return minutos pasados a hora en formato hh:mm
+     * @param minutos Minutos que se desean convertir a horas.
+     * @return Minutos pasados a hora en formato hh:mm.
      */
     public static String minutosAHora(int minutos) {
         int hora = minutos/60;
@@ -159,10 +159,10 @@ public class Utilidades {
         return resultado;
     }
 
-    /**Formatea una duración en minutos a un formato legible (1h 30min)
+    /** Formatea una duración en minutos a un formato legible (ej. 1h 30min).
      *
-     * @param duracionMinutos Minutos que se desean convertir
-     * @return Minutos formateados
+     * @param duracionMinutos Minutos que se desean convertir.
+     * @return Minutos formateados.
      */
     public static String formatearDuracion(int duracionMinutos) {
         String resultado = "";
@@ -176,25 +176,25 @@ public class Utilidades {
             resultado = Integer.parseInt(partes[0])+"h "+Integer.parseInt(partes[1])+"min";
         }
         return resultado;
-    }// Formatea una duración en minutos a formato legible (ej: 90 -> "1h 30min")
+    }
 
-    /**Añade "€" a un decimal para expresar un precio
+    /** Añade "€" a un decimal para expresar un precio.
      *
-     * @param precio Número decimal para formatear
-     * @return Precio formateado
+     * @param precio Número decimal para formatear.
+     * @return Precio formateado.
      */
     public static String formatearPrecio(double precio) {
-        String[] decimales= (Double.toString(precio)).split("\\.");
+        String[] decimales = (Double.toString(precio)).split("\\.");
         String resultado = "";
         if (decimales[1].length() < 2) {
             resultado = decimales[0] + "."+decimales[1]+"0 €";
-        }else{
+        }else {
             resultado = precio + " €";
         }
         return resultado;
     }
 
-    /**Convierte una cadena con precio (ej: "12.50 €") a double
+    /** Convierte una cadena con precio (ej: "12.50 €") a double
      *
      * @param precioStr String que representa un precio
      * @return double que representa un precio
@@ -203,5 +203,4 @@ public class Utilidades {
         String[] partes = precioStr.split(" ");
         return Double.parseDouble(partes[0]);
     }
-
 }

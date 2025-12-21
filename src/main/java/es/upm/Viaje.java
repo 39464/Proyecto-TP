@@ -8,7 +8,7 @@ import java.io.*;
  * @version 1.0
  *
  * Gestiona la planificación de un viaje organizando actividades por días
- * y controlando horarios y solapamientos
+ * y controlando horarios y solapamientos.
  */
 
 public class Viaje {

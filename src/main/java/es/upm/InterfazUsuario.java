@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @version 1.0
  *
- * Gestiona la interacción con el usuario a través de la consola.
+ * Gestiona la interacción con el usuario a través de un menú en consola.
  */
 
 public class InterfazUsuario {
@@ -20,12 +20,13 @@ public class InterfazUsuario {
     public int maxComentarios;
     public int maxActividades;
 
-    /** Constructor del objeto InterfazUsuario con el catálogo y viaje proporcionados
+    /**
+     * Constructor del objeto InterfazUsuario con el catálogo y viaje proporcionados.
      *
-     * @param catalogo objeto CatálogoActividades que recoge todas las actividades
-     * @param viaje objeto Viaje que recoge el itinerario
-     * @param maxRecursos número máximo de recursos que puede haber por actividad
-     * @param maxComentarios número máximo de comentarios que puede haber por actividad
+     * @param catalogo Objeto CatálogoActividades que recoge todas las actividades.
+     * @param viaje Objeto Viaje que recoge el itinerario.
+     * @param maxRecursos Número máximo de recursos que puede haber por actividad.
+     * @param maxComentarios Número máximo de comentarios que puede haber por actividad.
      */
     public InterfazUsuario(CatalogoActividades catalogo, Viaje viaje, int maxRecursos, int maxComentarios) {
         this.viaje = viaje;
@@ -34,30 +35,33 @@ public class InterfazUsuario {
         this.maxComentarios = maxComentarios;
     }
 
-    /** Inicia la interfaz de usuario
-     * @param scanner Objeto Scanner que lee la entrada de teclado
+    /**
+     * Inicia la interfaz de usuario.
+     *
+     * @param scanner Objeto Scanner que lee la entrada de teclado.
      */
     public void iniciar(Scanner scanner) {
         menuPrincipal(scanner);
     }
 
-    /** Muestra un menú con opciones y permite al usuario elegir una, hasta que el usuario decida salir
+    /**
+     * Muestra un menú con opciones y permite al usuario elegir una, hasta que el usuario decida salir.
      *
-     * @param scanner Objeto Scanner que lee la entrada del teclado, si es un
+     * @param scanner Objeto Scanner que lee una opción.
      */
     private void menuPrincipal(Scanner scanner) {
         boolean seguir = true;
-        do{
+        do {
             mostrarMenu();
             String input = scanner.nextLine();
             int opcion;
-            try{
+            try {
                 opcion = Integer.parseInt(input);
-            }catch(NumberFormatException e){
+            } catch(NumberFormatException e){
                 opcion = -1;
                 System.out.println("No es una opción válida.");
             }
-            switch(opcion){
+            switch(opcion) {
                 case 1: agregarActividad(scanner); break;
                 case 2: consultarActividad(scanner); break;
                 case 3: guardarActividades(scanner); break;
@@ -69,7 +73,9 @@ public class InterfazUsuario {
         } while(seguir);
     }
 
-    /** Muestra las opciones del menú principal */
+    /**
+     * Muestra las opciones del menú principal.
+     */
     private void mostrarMenu() {
         System.out.println("\n---Menú principal---\n");
         System.out.println("1. Agregar Actividad\n" +
@@ -82,9 +88,10 @@ public class InterfazUsuario {
         System.out.println("Elige una opcion: ");
     }
 
-    /** Lee los datos de una nueva actividad y la agrega al catálogo
+    /**
+     * Lee los datos de una nueva actividad y la agrega al catálogo.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param scanner Objeto Scanner que lee la entrada por teclado.
      */
     private void agregarActividad(Scanner scanner) {
         String nombre = Utilidades.leerCadena(scanner,"Nombre de la actividad: ");
@@ -100,9 +107,9 @@ public class InterfazUsuario {
         scanner.nextLine();
         System.out.print("Introduce los recursos (una línea por recurso, escribe 'fin' para terminar):");
         String resultadoR = "";
-        while(!resultadoR.equals("fin")){
+        while(!resultadoR.equals("fin")) {
             resultadoR = Utilidades.leerCadena(scanner, "");
-            if(!resultadoR.equals("fin")){
+            if(!resultadoR.equals("fin")) {
                 int recursos = nueva.agregarRecurso(resultadoR);
                 if(recursos == Actividad.ERROR_RECURSOS_COMPLETOS){
                     System.out.println("No se pueden añadir más recursos");
@@ -116,14 +123,14 @@ public class InterfazUsuario {
 
         System.out.print("Introduce los comentarios (una línea por comentario, escribe 'fin' para terminar):");
         String resultadoC = "";
-        while(!resultadoC.equals("fin")){
+        while(!resultadoC.equals("fin")) {
             resultadoC = Utilidades.leerCadena(scanner, "");
-            if(!resultadoC.equals("fin")){
+            if(!resultadoC.equals("fin")) {
                 int comentarios = nueva.agregarComentario(resultadoC);
                 if(comentarios == Actividad.ERROR_COMENTARIOS_COMPLETOS) {
                     System.out.println("No se pueden añadir más comentarios");
                     resultadoC = "fin";
-                }else if(comentarios == Actividad.ERROR_VALOR_INVALIDO) {
+                } else if(comentarios == Actividad.ERROR_VALOR_INVALIDO) {
                     System.out.println("El comentario es invalido");
                     resultadoC = "fin";
                 }
@@ -132,50 +139,53 @@ public class InterfazUsuario {
 
         if(catalogo.agregarActividad(nueva)== CatalogoActividades.EXITO){
             System.out.println("¡Actividad agregada exitosamente!");
-        } else{
+        } else {
             System.out.println("No se pueden añadir más actividades.");
         }
     }
 
-    /** Permite buscar una actividad y editarla
+    /**
+     * Permite buscar una actividad y editarla.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param scanner Objeto Scanner que lee la entrada por teclado.
      */
     private void consultarActividad(Scanner scanner) {
         Actividad actividadBuscada = buscarActividadPorNombre(scanner);
-        if(actividadBuscada == null){
+        if(actividadBuscada == null) {
             System.out.println("Actividad no encontrada.");
         } else {
             editarActividad(scanner, actividadBuscada);
         }
     }
 
-    /** Busca actividades por nombre dentro del catálogo, crea un array con actividades (llamando a seleccionarActividad)
-     * que coincidan y permite seleccionar una
+    /**
+     * Busca actividades por nombre dentro del catálogo, crea un array con actividades (llamando a seleccionarActividad)
+     * que coincidan y permite seleccionar una.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
-     * @return objeto Actividad cuyo nombre contiene el texto introducido por teclado
+     * @param scanner Objeto Scanner que lee la entrada por teclado.
+     * @return Actividad cuyo nombre contiene el texto introducido por teclado o null si no se eligió ninguna.
      */
     private Actividad buscarActividadPorNombre(Scanner scanner) {
-        String nombre = "";
-        boolean resultado = true;
-        while(resultado){
-            nombre = Utilidades.leerCadena(scanner,"Introduce el texto de la actividad a buscar (-FIN- para volver): ");
-            if(nombre.equals("-FIN-") || nombre != null) resultado = false;
+        String nombre = Utilidades.leerCadena(scanner, "Introduce el texto de la actividad a buscar (-FIN- para volver): ");
+        if (nombre.equals("-FIN-")){
+            return null;
         }
+
         Actividad[] buscadas = catalogo.buscarActividadPorNombre(nombre);
-        if(buscadas == null || buscadas.length == 0){
-            System.out.println("Actividad no encontrada.");
+        if (buscadas.length == 0){
+            return null;
         }
+
         return seleccionarActividad(scanner, buscadas);
     }
 
-    /** Muestra un listado numerado de actividades y permite elegir una
+    /**
+     * Muestra un listado numerado de actividades y permite elegir una.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
-     * @param actividades array de objetos Actividad cuyo nombre coincide con el nombre introducido en el
-     *                    metodo buscarActividadPorNombre
-     * @return objeto Actividad elegido por el usuario
+     * @param scanner Objeto Scanner que lee la opción.
+     * @param actividades Array de objetos Actividad cuyo nombre coincide con el nombre introducido en el
+     *                    metodo buscarActividadPorNombre.
+     * @return Actividad elegida por el usuario.
      */
     private Actividad seleccionarActividad(Scanner scanner, Actividad[] actividades) {
         System.out.println("Actividades encontradas:");
@@ -188,16 +198,17 @@ public class InterfazUsuario {
         return actividades[opcion-1];
     }
 
-    /** Muestra un menú con opciones y permite añadir recursos a la actividad, añadir comentarios, o eliminar la actividad
+    /**
+     * Muestra un menú con opciones y permite añadir recursos/comentarios a la actividad o eliminar la actividad.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
-     * @param seleccionada objeto Actividad que se desea modificar
+     * @param scanner Objeto Scanner que lee la opción.
+     * @param seleccionada Actividad que se desea modificar.
      */
     private void editarActividad(Scanner scanner, Actividad seleccionada) {
         System.out.println(seleccionada.toString());
         System.out.println("1. Añadir recurso\n2. Añadir comentario\n3. Eliminar actividad\n4. Volver");
         int opcion = Utilidades.leerNumero(scanner, "Elija una opción:\n", 1, 4);
-        switch(opcion){
+        switch(opcion) {
             case 1:
                 System.out.print("Introduce el recurso a añadir: ");
                 switch(seleccionada.agregarRecurso(scanner.nextLine())) {
@@ -235,55 +246,59 @@ public class InterfazUsuario {
         }
     }
 
-    /** Lee el nombre del archivo y permite guardar las actividades en un archivo, llamando a guardarActividadesEnArchivo
+    /**
+     * Solicita nombre del archivo y guarda las actividades del catálogo en un archivo, llamando a guardarActividadesEnArchivo.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param scanner Objeto Scanner que lee la entrada por teclado.
      */
     private void guardarActividades(Scanner scanner) {
         try {
             String nombreArchivo = Utilidades.leerCadena(scanner, "Archivo donde guardar las actividades: ");
             guardarActividadesEnArchivo(nombreArchivo);
-        }catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex){
             System.out.println("No se encontro el archivo.");
         }
     }
 
-    /** Llama al metodo guardarActividades de la clase CatalogoActividades para guardar el catálogo del objeto en un archivo
+    /**
+     * Llama al metodo guardarActividades de la clase CatalogoActividades para guardar el catálogo del objeto en un archivo.
      *
-     * @param nombreArchivo String que indica el nombre del archivo
+     * @param nombreArchivo String que indica el nombre del archivo.
      * @throws FileNotFoundException
      */
     private void guardarActividadesEnArchivo(String nombreArchivo) throws FileNotFoundException {
         CatalogoActividades catalogo = new CatalogoActividades(2);
-        try{
+        try {
             catalogo.guardarActividades(nombreArchivo);
-        }catch (IOException e){
+        } catch (IOException e){
             System.out.println("IOException al escribir: "+ e.getMessage());
         }
     }
 
-    /** Lee el nombre de un archivo y llama a cargarActividadesDesdeArchivo para crear un nuevo catálogo
+    /**
+     * Lee el nombre de un archivo y llama a cargarActividadesDesdeArchivo para crear un nuevo catálogo.
      *
-     * @param scanner objeto Scanner que lee la entrada por teclado
+     * @param scanner Objeto Scanner que lee la entrada por teclado.
      */
     private void cargarActividades(Scanner scanner) {
         String nombreArchivo = Utilidades.leerCadena(scanner, "Archivo de donde cargar las actividades: ");
-        try{
+        try {
             cargarActividadesDesdeArchivo(nombreArchivo);
             System.out.println("Actividades cargadas desde "+ nombreArchivo);
-        }catch(FileNotFoundException ex){
-            System.out.println("No se encontro el archivo.");
+        } catch(FileNotFoundException ex){
+            System.out.println("No se encontró el archivo.");
         }
     }
 
-    /** Carga las actividades dentro de un archivo a un nuevo catálogo, mediante un BufferedReader
+    /**
+     * Carga las actividades dentro de un archivo a un nuevo catálogo, mediante un BufferedReader.
      *
-     * @param nombreArchivo String que indica el nombre del archivo
+     * @param nombreArchivo String que indica el nombre del archivo.
      * @throws FileNotFoundException
      */
     private void cargarActividadesDesdeArchivo(String nombreArchivo) throws FileNotFoundException {
         BufferedReader in;
-        try{
+        try {
             in = new BufferedReader(new FileReader(nombreArchivo));
             int cont = 0;
             while(cont <= this.maxActividades){
@@ -293,16 +308,56 @@ public class InterfazUsuario {
                 if(catalogo.agregarActividad(nueva) == CatalogoActividades.EXITO)
                     System.out.println("Actividades cargadas desde "+nombreArchivo);
             }
-        }catch (IOException e){
-            System.out.println("Error al cargar las actividades");
+        } catch (IOException e){
+            System.out.println("Error al cargar las actividades.");
         }
     }
 
+    /**
+     * Muestra el itinerario actual y permite agregar actividades a días específicos.
+     *
+     * @param scanner Objeto Scanner que lee los datos.
+     */
     private void planificarViaje(Scanner scanner) {
-        // Muestra el itinerario actual y permite agregar actividades a días específicos
+        System.out.println("Planificación del viaje:");
+        System.out.println(viaje.toString());
+
+        int dia = Utilidades.leerNumero(scanner, "Introduce el día del viaje (1-" + viaje.getNumDias() + "): ", 1, viaje.getNumDias());
+        String hora = Utilidades.leerHora(scanner, "Introduce la hora de inicio (HH:MM): ");
+
+        Actividad actividad = buscarActividadPorNombre(scanner);
+
+        if (actividad != null) {
+            int resultado = viaje.agregarActividad(dia - 1, actividad, hora);
+            switch (resultado) {
+                case Viaje.EXITO:
+                    System.out.println("Actividad planificada para el día " + dia + " a las " + hora);
+                    break;
+                case Viaje.ERROR_DIA_COMPLETO:
+                    System.out.println("No se pueden agregar más actividades a este día.");
+                    break;
+                case Viaje.ERROR_SOLAPAMIENTO:
+                    System.out.println("La actividad se solapa con otra actividad ya planificada.");
+                    break;
+                case Viaje.ERROR_DIA_INVALIDO:
+                    System.out.println("Día inválido.");
+                    break;
+            }
+        }
     }
 
+    /**
+     * Lee el nombre del archivo y guarda el itinerario del viaje.
+     *
+     * @param scanner Objeto Scanner que lee el nombre del archivo.
+     */
     private void guardarItinerario(Scanner scanner) {
-        // Lee el nombre del archivo y guarda el itinerario del viaje
+        String nombreArchivo = Utilidades.leerCadena(scanner, "Archivo donde guardar el itinerario: ");
+        try {
+            viaje.guardarItinerario(nombreArchivo);
+            System.out.println("Itinerario guardado en " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al guardar el archivo.");
+        }
     }
 }

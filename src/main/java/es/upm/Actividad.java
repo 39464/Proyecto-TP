@@ -34,6 +34,13 @@ public class Actividad {
     private int numRecursos;
     private int numComentarios;
 
+    /**
+     * Constructor de la clase Actividad.
+     *
+     * @param nombre Nombre de la actividad.
+     * @param maxRecursos Número máximo de recursos permitidos.
+     * @param maxComentarios Número máximo de comentarios permitidos.
+     */
     public Actividad(String nombre,
                      int maxRecursos,
                      int maxComentarios) {
@@ -48,52 +55,86 @@ public class Actividad {
         this.duracionMinutos = 0;
     }
 
+    /**
+     * Devuelve el nombre de la actividad
+     * @return Nombre de la actividad.
+     */
     public String getNombre() {
-        // Devuelve el nombre de la actividad
         return nombre;
     }
 
+    /**
+     * Devuelve la descripción de la actividad.
+     * @return Descripción de la actividad.
+     */
     public String getDescripcion() {
-        // Devuelve la descripción de la actividad
         return descripcion;
     }
+
+    /**
+     * Establece la descripción de la actividad.
+     * @param descripcion Nueva descripción.
+     */
     public void setDescripcion(String descripcion) {
-        // Setea la descripción de la actividad
         this.descripcion = descripcion;
     }
 
+    /**
+     * Devuelve el precio de la actividad.
+     * @return Precio de la actividad.
+     */
     public double getPrecio() {
-        // Devuelve el precio de la actividad
         return precio;
     }
 
+    /**
+     * Establece el precio de la actividad.
+     * @param precio Nuevo precio.
+     */
     public void setPrecio(double precio) {
-        // Setea el precio de la actividad
         this.precio = precio;
     }
 
+    /**
+     * Devuelve la duración de la actividad en minutos.
+     * @return Duración de la actividad en minutos.
+     */
     public int getDuracionMinutos() {
-        // Devuelve la duración de la actividad
         return duracionMinutos;
     }
 
+    /**
+     * Establece la duración de la actividad en minutos.
+     * @param duracionMinutos Nueva duración en minutos.
+     */
     public void setDuracionMinutos(int duracionMinutos) {
-        // Setea la duración de la actividad
         this.duracionMinutos = duracionMinutos;
     }
 
+    /**
+     * Devuelve el máximo de recursos que puede usar la actividad.
+     * @return Capacidad máxima de recursos.
+     */
     public int getMaxRecursos() {
-        // Devuelve el máximo de recursos que puede usar la actividad
         return recursos.length;
     }
 
+    /**
+     * Devuelve el máximo de comentarios que puede haber en la actividad.
+     * @return Capacidad máxima de comentarios.
+     */
     public int getMaxComentarios() {
-        // Devuelve el máximo de comentarios que puede haber en la actividad
         return comentarios.length;
     }
 
-    public int agregarRecurso(String recurso) {  // SE HA ELIMINADO STATIC DEL ESQUELETO ORIGINAL PARA QUE FUNCIONE CON LOS OBJETOS
-        // Agrega un recurso a la actividad si no se ha alcanzado el máximo.
+    /**
+     * Agrega un recurso a la actividad si no se ha alcanzado el máximo.
+     *
+     * @param recurso Texto del recurso a agregar.
+     * @return Entero que indica si la operación ha tenido éxito, mediante los valores de éxito
+     * definidos en la clase CatalogoActividades.
+     */
+    public int agregarRecurso(String recurso) {
         if (recurso == null || recurso.trim().isEmpty()) {
             return ERROR_VALOR_INVALIDO;
         }
@@ -105,8 +146,14 @@ public class Actividad {
         return EXITO;
     }
 
+    /**
+     * Agrega un comentario a la actividad si no se ha alcanzado el máximo.
+     *
+     * @param comentario Texto del comentario a agregar.
+     * @return Entero que indica si la operación ha tenido éxito, mediante los valores de éxito
+     * definidos en la clase CatalogoActividades.
+     */
     public int agregarComentario(String comentario) {
-        // Agrega un comentario a la actividad si no se ha alcanzado el máximo.
         if (comentario == null || comentario.trim().isEmpty()) {
             return ERROR_VALOR_INVALIDO;
         }
@@ -118,39 +165,63 @@ public class Actividad {
         return EXITO;
     }
 
+    /**
+     * Devuelve el array interno de recursos (puede estar parcialmente lleno).
+     * @return Array interno de recursos.
+     */
     public String[] getRecursos() {
-        // Devuelve el array interno de recursos (puede estar parcialmente lleno)
         return recursos;
     }
 
+    /**
+     * Devuelve el array interno de comentarios (puede estar parcialmente lleno).
+     * @return Array interno de comentarios.
+     */
     public String[] getComentarios() {
-        // Devuelve el array interno de comentarios (puede estar parcialmente lleno).
         return comentarios;
     }
 
+    /**
+     * Devuelve si se alcanzó el máximo de recursos.
+     * @return true si está lleno, false si no.
+     */
     public boolean recursosCompletos() {
-        // Devuelve si se alcanzó el máximo de recursos
         return numRecursos >= recursos.length;
     }
 
+    /**
+     * Devuelve si se alcanzó el máximo de comentarios.
+     * @return true si está lleno, false si no.
+     */
     public boolean comentariosCompletos() {
-        // Devuelve si se alcanzó el máximo de comentarios
         return numComentarios >= comentarios.length;
     }
 
+    /**
+     * Devuelve el número actual de recursos almacenados.
+     * @return Cantidad de recursos almacenados.
+     */
     public int getNumRecursos() {
-        // Devuelve el número actual de recursos almacenados
         return numRecursos;
     }
 
+    /**
+     * Devuelve el número actual de comentarios almacenados.
+     * @return Cantidad de comentarios almacenados.
+     */
     public int getNumComentarios() {
-        // Devuelve el número actual de comentarios almacenados
         return numComentarios;
     }
 
+    /**
+     * Devuelve la representación textual completa de la actividad.
+     * Incluye nombre, descripción, precio, duración, lista de recursos
+     * y lista de comentarios.
+     *
+     * @return String con la información completa de la actividad.
+     */
     @Override
     public String toString() {
-        // Devuelve la representación textual completa de la actividad
         StringBuilder sb = new StringBuilder();
         sb.append("Actividad: ").append(nombre).append("\n");
         sb.append("Descripción: ").append(descripcion).append("\n");
@@ -169,9 +240,14 @@ public class Actividad {
         return sb.toString();
     }
 
-    public String toRawString() {  // SE HA ELIMINADO STATIC DEL ESQUELETO ORIGINAL
-        // Devuelve la representación textual compacta para guardado/carga
-        StringBuilder sb = new StringBuilder();   // CAMBIAR STRINGBUILDER
+    /**
+     * Devuelve la representación textual compacta para guardado/carga.
+     *
+     * @return String con el formato raw de la actividad.
+     */
+    public String toRawString() {
+        //
+        StringBuilder sb = new StringBuilder();
         sb.append(nombre).append("\n");
         sb.append(descripcion).append("\n");
         sb.append(precio).append("\n");
@@ -191,13 +267,22 @@ public class Actividad {
         return sb.toString();
     }
 
+    /**
+     * Devuelve la actividad leída de un BufferedReader.
+     * Lee secuencialmente según el formato generado por {@link #toRawString()}.
+     *
+     * @param reader Flujo de entrada desde el que se lee.
+     * @param maxRecursos Máximo de recursos permitidos para la nueva actividad.
+     * @param maxComentarios Máximo de comentarios permitidos para la nueva actividad.
+     * @return La actividad creada o null si no se pudo leer el nombre (fin de fichero).
+     * @throws IOException Si ocurre un error de lectura.
+     */
     public static Actividad fromBufferedReader(
             BufferedReader reader,
             int maxRecursos,
             int maxComentarios) throws IOException {
-        // Devuelve la actividad leída de un BufferedReader
         String nombre = reader.readLine();
-        if (nombre == null) return null; // Fin de archivo o error
+        if (nombre == null) return null;
 
         Actividad actividad = new Actividad(nombre, maxRecursos, maxComentarios);
 
@@ -210,28 +295,23 @@ public class Actividad {
         String duracionStr = reader.readLine();
         if (duracionStr != null) actividad.setDuracionMinutos(Integer.parseInt(duracionStr));
 
-        // Leer recursos hasta encontrar "COMENTARIOS"
         String linea;
         boolean leyendoRecursos = true;
         while (leyendoRecursos && (linea = reader.readLine()) != null) {
             if (linea.equals("COMENTARIOS")) {
                 leyendoRecursos = false;
             } else {
-                // Solo agregamos si hay espacio
-                // Si está lleno, leemos la línea pero no la guardamos
                 if (!actividad.recursosCompletos()) {
                     actividad.agregarRecurso(linea);
                 }
             }
         }
 
-        // Leer comentarios hasta encontrar "-----"
         boolean leyendoComentarios = true;
         while (leyendoComentarios && (linea = reader.readLine()) != null) {
             if (linea.equals("-----")) {
                 leyendoComentarios = false;
             } else {
-                // Solo agregamos si hay espacio
                 if (!actividad.comentariosCompletos()) {
                     actividad.agregarComentario(linea);
                 }

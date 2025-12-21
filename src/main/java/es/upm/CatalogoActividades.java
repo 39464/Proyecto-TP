@@ -7,7 +7,8 @@ import java.io.*;
  *
  * @version 1.0
  *
- * Clase con métodos de gestión de un catálogo de actividades
+ * Clase con métodos de gestión de un catálogo de actividades.
+ * Permite agregar, eliminar, buscar, guardar y cargar desde archivos.
  */
 
 public class CatalogoActividades {
@@ -20,18 +21,19 @@ public class CatalogoActividades {
     private int maxActividades;
     private Actividad[] catalogo;
 
-    /** Constructor del catálogo
+    /**
+     * Constructor del catálogo.
      *
-     * @param maxActividades máximo de actividades que puede albergar el array del catálogo
+     * @param maxActividades Máximo de actividades que puede albergar el array del catálogo.
      */
     public CatalogoActividades(int maxActividades) {
         this.numActividades = 0;
         this.maxActividades = maxActividades;
         this.catalogo = new Actividad[maxActividades]; }
 
-    /** Comprueba si el catálogo de actividades está lleno
-     *
-     * @return true si el catálogo ha alcanzado su capacidad máxima
+    /**
+     * Comprueba si el catálogo de actividades está lleno.
+     * @return true si el catálogo ha alcanzado su capacidad máxima.
      */
     public boolean actividadesCompletas() {
         boolean resultado = false;
@@ -45,16 +47,18 @@ public class CatalogoActividades {
         return resultado;
     }
 
-    /** Getter de numActividades
-     *
-     * @return número actual de actividades en el catálogo
+    /**
+     * Getter de numActividades.
+     * @return Número actual de actividades en el catálogo.
      */
     public int getNumActividades() { return numActividades; }
 
-    /** Agrega una actividad al catálogo si hay espacio disponible
+    /**
+     * Agrega una actividad al catálogo si hay espacio disponible.
      *
-     * @param actividad actividad a agregar en el catalogo
-     * @return entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     * @param actividad Actividad a agregar en el catálogo.
+     * @return Entero que indica si la operación ha tenido éxito, mediante los valores de éxito
+     * definidos en la clase CatalogoActividades.
      */
     public int agregarActividad(Actividad actividad) {
         int resultado = EXITO;
@@ -67,10 +71,12 @@ public class CatalogoActividades {
         return resultado;
     }
 
-    /** Elimina la actividad cuyo nombre sea el seleccionado
+    /**
+     * Elimina la actividad cuyo nombre sea el seleccionado.
      *
-     * @param seleccionada actividad para buscar y eliminar
-     * @return entero que indica si la operación ha tenido éxito, mediante los valores de éxito definidos en la clase Catálogo
+     * @param seleccionada Actividad para buscar y eliminar.
+     * @returnEntero que indica si la operación ha tenido éxito, mediante los valores de éxito
+     * definidos en la clase CatalogoActividades.
      */
     public boolean eliminarActividad(Actividad seleccionada) {
         boolean resultado = false;
@@ -90,10 +96,11 @@ public class CatalogoActividades {
         return resultado;
     }
 
-    /** Busca actividades cuyo nombre contenga un texto
+    /**
+     * Busca actividades cuyo nombre contenga un texto.
      *
-     * @param texto texto a buscar entre los nombres de las actividades del catálogo
-     * @return Array de actividades cuyo nombre contenga el texto recibido como parámetro
+     * @param texto Texto a buscar entre los nombres de las actividades del catálogo.
+     * @return Array de actividades cuyo nombre contenga el texto recibido como parámetro.
      */
     public Actividad[] buscarActividadPorNombre(String texto) {
         Actividad[] coinciden = new Actividad[maxActividades];
@@ -114,38 +121,40 @@ public class CatalogoActividades {
         return resultado;
     }
 
-    /** Guarda todas las actividades en un archivo de texto, utilizando su representación compacta
+    /**
+     * Guarda todas las actividades en un archivo de texto, utilizando su representación compacta.
      *
-     * @param nombreArchivo nombre del archivo que se desea crear para contener las actividades del catálogo
-     * @throws IOException error al escribir el archivo
+     * @param nombreArchivo Nombre del archivo que se desea crear para contener las actividades del catálogo.
+     * @throws IOException Si ocurre un error de escritura.
      */
     public void guardarActividades(String nombreArchivo) throws IOException {
         PrintWriter out = null;
-        try{
+        try {
             out = new PrintWriter(new FileWriter(nombreArchivo));
             for (int i = 0; i < this.numActividades; i++) {
                 out.print(this.catalogo[i].toRawString());
             }
-            System.out.println("Actividades guardadas en"+ nombreArchivo);
-        } finally{
+            System.out.println("Actividades guardadas en "+ nombreArchivo);
+        } finally {
             try {
                 if (out != null) out.close();
-            }catch(Exception ex){
+            } catch(Exception ex){
                 System.out.println("Error al cerrar el archivo.");
             }
         }
     }
 
-    /** Carga actividades desde un archivo de texto previamente guardado
+    /**
+     * Carga actividades desde un archivo de texto previamente guardado.
      *
-     * @param nombreArchivo String que indique el nombre del archivo del cual extraer las actividades
-     * @param maxRecursos número máximo de recursos que se pueden cargar
-     * @param maxComentarios número máximo de comentarios que se pueden cargar
-     * @throws IOException error al escribir el archivo
+     * @param nombreArchivo String que indica el nombre del archivo del cual extraer las actividades.
+     * @param maxRecursos Número máximo de recursos que se pueden cargar.
+     * @param maxComentarios Número máximo de comentarios que se pueden cargar.
+     * @throws IOException Si ocurre un error de escritura.
      */
     public void cargarActividades(String nombreArchivo, int maxRecursos, int maxComentarios) throws IOException {
         BufferedReader in = null;
-        try{
+        try {
             in = new BufferedReader(new FileReader(nombreArchivo));
             boolean fin = false;
             while (!actividadesCompletas() && !fin) {
@@ -156,8 +165,8 @@ public class CatalogoActividades {
                     fin = true;
                 }
             }
-        }finally{
-            try{
+        } finally {
+            try {
                 if(in != null) in.close();
             } catch (IOException e) {
                 System.out.println("Error al cerrar el archivo.");
