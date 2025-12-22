@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * @author Irene Lombardo Cabrera
- * @author Almudena Moyano Londoño
+ * @author Irene Lombardo Cabrera, bw0038
+ * @author Almudena Moyano Londoño, bw0115
  *
  * @version 1.0
  *

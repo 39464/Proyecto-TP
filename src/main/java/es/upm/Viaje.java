@@ -2,8 +2,8 @@ package es.upm;
 import java.io.*;
 
 /**
- * @author Irene Lombardo Cabrera
- * @author Almudena Moyano Londoño
+ * @author Irene Lombardo Cabrera, bw0038
+ * @author Almudena Moyano Londoño, bw0115
  *
  * @version 1.0
  *
