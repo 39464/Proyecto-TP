@@ -243,7 +243,7 @@ public class Viaje {
                 out.print("Día " + (i + 1) + ": ");
 
                 if (numActividadesPorDia[i] == 0) {
-                    out.println("---");
+                    out.print("---\n");
                 } else {
                     for (int j = 0; j < numActividadesPorDia[i]; j++) {
                         Actividad act = actividades[i][j];
@@ -261,7 +261,7 @@ public class Viaje {
                         totalActividades++;
                         precioTotal += act.getPrecio();
                     }
-                    out.println();
+                    out.print("\n");
                 }
             }
 
