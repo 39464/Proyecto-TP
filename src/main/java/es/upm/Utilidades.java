@@ -14,7 +14,8 @@ import java.util.Scanner;
 
 public class Utilidades {
 
-    /** Lee un String por entrada de teclado.
+    /**
+     * Lee un String por entrada de teclado.
      *
      * @param teclado Scanner que lee la entrada del teclado.
      * @param s Mensaje escrito en pantalla que pregunta al usuario por un String.
@@ -25,7 +26,8 @@ public class Utilidades {
         return teclado.nextLine();
     }
 
-    /** Lee un número entero por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
+    /**
+     * Lee un número entero por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
      *
      * @param teclado Scanner que lee la entrada del teclado.
      * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un entero.
@@ -54,7 +56,8 @@ public class Utilidades {
         return resultado;
     }
 
-    /** Lee un número decimal por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
+    /**
+     * Lee un número decimal por entrada de teclado y comprueba que está dentro de un intervalo [minimo, maximo].
      *
      * @param teclado Scanner que lee la entrada del teclado.
      * @param mensaje Mensaje escrito en pantalla, pregunta al usuario por un double.
@@ -84,7 +87,8 @@ public class Utilidades {
         return resultado;
     }
 
-    /** Lee una hora por entrada de teclado, comprueba que esté en el formato hh:mm.
+    /**
+     * Lee una hora por entrada de teclado, comprueba que esté en el formato hh:mm.
      *
      * @param teclado Scanner que lee la entrada de teclado.
      * @param mensaje Mensaje para imprimir por pantalla, pide una hora en formato hh:mm.
@@ -126,7 +130,8 @@ public class Utilidades {
     // Métodos de conversión de formatos
     // =========================================================================
 
-    /** Calcula los minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
+    /**
+     * Calcula los minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
      *
      * @param hora Hora en formato hh:mm.
      * @return Minutos que han pasado desde medianoche hasta la hora recibida como parámetro.
@@ -136,7 +141,8 @@ public class Utilidades {
         return (Integer.parseInt(partes[0])*60) + Integer.parseInt(partes[1]);
     }
 
-    /** Pasa los minutos recibidos como parámetro a horas, transcurridas desde medianoche, en formato hh:mm.
+    /**
+     * Pasa los minutos recibidos como parámetro a horas, transcurridas desde medianoche, en formato hh:mm.
      *
      * @param minutos Minutos que se desean convertir a horas.
      * @return Minutos pasados a hora en formato hh:mm.
@@ -159,7 +165,8 @@ public class Utilidades {
         return resultado;
     }
 
-    /** Formatea una duración en minutos a un formato legible (ej. 1h 30min).
+    /**
+     * Formatea una duración en minutos a un formato legible (ej. 1h 30min).
      *
      * @param duracionMinutos Minutos que se desean convertir.
      * @return Minutos formateados.
@@ -178,7 +185,8 @@ public class Utilidades {
         return resultado;
     }
 
-    /** Añade "€" a un decimal para expresar un precio.
+    /**
+     * Añade "€" a un decimal para expresar un precio.
      *
      * @param precio Número decimal para formatear.
      * @return Precio formateado.
@@ -194,10 +202,11 @@ public class Utilidades {
         return resultado;
     }
 
-    /** Convierte una cadena con precio (ej: "12.50 €") a double
+    /**
+     * Convierte una cadena con precio (ej: "12.50 €") a double.
      *
-     * @param precioStr String que representa un precio
-     * @return double que representa un precio
+     * @param precioStr String que representa un precio.
+     * @return double que representa un precio.
      */
     public static double cadenaAPrecio(String precioStr) {
         String[] partes = precioStr.split(" ");
